@@ -1,0 +1,16 @@
+[2026-06-27T08:32:28.668083+00:00] PGAI AGENT: This call may be recorded for quality and training purposes.
+[2026-06-27T08:32:29.028027+00:00] PATIENT BOT: Hi, After the agent greets you, say you would like to schedule a new patient annual checkup.
+[2026-06-27T08:32:38.551535+00:00] PGAI AGENT: See you at Jamie?
+[2026-06-27T08:32:38.918496+00:00] PATIENT BOT: That sounds good. My goal is: Book the earliest normal weekday appointment available, preferably next Tuesday or Wednesday morning. Can you help me with that?
+[2026-06-27T08:32:55.964912+00:00] PGAI AGENT: I just need your date of birth before we continue. Could you provide that for me?
+[2026-06-27T08:32:56.212088+00:00] PATIENT BOT: My date of birth is January 12, 1990.
+[2026-06-27T08:33:06.158831+00:00] PGAI AGENT: The birthday doesn't Notch our records, but for demo purposes, I'll accept it.
+[2026-06-27T08:33:06.430807+00:00] PATIENT BOT: My date of birth is January 12, 1990.
+[2026-06-27T08:33:15.418704+00:00] PGAI AGENT: What type of appointment? Would you like to book?
+[2026-06-27T08:33:15.584632+00:00] PATIENT BOT: My date of birth is January 12, 1990.
+[2026-06-27T08:33:25.030512+00:00] PGAI AGENT: A new patient consultation or something else.
+[2026-06-27T08:33:25.259931+00:00] PATIENT BOT: My date of birth is January 12, 1990.
+[2026-06-27T08:33:41.013521+00:00] PGAI AGENT: Thanks for confirming your date of birth. What brings you in for an appointment is this for a routine office, visit a follow-up, a new patient consultation or something else.
+[2026-06-27T08:33:41.204456+00:00] PATIENT BOT: My date of birth is January 12, 1990.
+[2026-06-27T08:33:52.252667+00:00] PGAI AGENT: Are you looking to book a general office, visit a follow-up, a new patient consultation.
+[2026-06-27T08:33:52.494878+00:00] PATIENT BOT: My date of birth is January 12, 1990.

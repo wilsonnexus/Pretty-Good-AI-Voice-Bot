@@ -8,3 +8,9 @@
 [2026-06-27T08:08:19.040652+00:00] PATIENT BOT: My date of birth is June 6, 1991.
 [2026-06-27T08:08:33.731222+00:00] PGAI AGENT: Got it. June 6th 1991. Are you needing to be seen for something urgent like pain or injury? Or is this a routine checkup?
 [2026-06-27T08:08:33.910692+00:00] PATIENT BOT: My date of birth is June 6, 1991.
+[2026-06-27T08:08:48.615944+00:00] PGAI AGENT: I have your date of birth is June 6th 1991. Are you hoping to be seen for an urgent issue? Like pain or injury?
+[2026-06-27T08:08:48.911404+00:00] PATIENT BOT: My date of birth is June 6, 1991.
+[2026-06-27T08:08:58.435758+00:00] PGAI AGENT: I have your date of birth is June 6th 1991.
+[2026-06-27T08:08:58.917332+00:00] PATIENT BOT: My date of birth is June 6, 1991.
+[2026-06-27T08:09:07.249518+00:00] PGAI AGENT: Or is this a routine appointment?
+[2026-06-27T08:09:07.474079+00:00] PATIENT BOT: My date of birth is June 6, 1991.
