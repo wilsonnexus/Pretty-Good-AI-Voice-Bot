@@ -1,0 +1,10 @@
+[2026-06-27T08:07:38.689167+00:00] PGAI AGENT: Call may be recorded for quality and training purposes.
+[2026-06-27T08:07:39.012934+00:00] PATIENT BOT: Hi, After greeting, ask for a same-week appointment. On the next turn, briefly say you are sorry to interrupt but only have a minute.
+[2026-06-27T08:07:50.984663+00:00] PGAI AGENT: Sorry to interrupt Jamie.
+[2026-06-27T08:07:51.167044+00:00] PATIENT BOT: That sounds good. My goal is: Schedule a same-week appointment while briefly interrupting the agent's long explanation. Can you help me with that?
+[2026-06-27T08:08:04.360660+00:00] PGAI AGENT: Can you please provide your date of birth?
+[2026-06-27T08:08:04.752750+00:00] PATIENT BOT: My date of birth is June 6, 1991.
+[2026-06-27T08:08:18.802778+00:00] PGAI AGENT: Thanks. Are you looking to be seen for an urgent concern like pain or injury? Or is this a routine visit?
+[2026-06-27T08:08:19.040652+00:00] PATIENT BOT: My date of birth is June 6, 1991.
+[2026-06-27T08:08:33.731222+00:00] PGAI AGENT: Got it. June 6th 1991. Are you needing to be seen for something urgent like pain or injury? Or is this a routine checkup?
+[2026-06-27T08:08:33.910692+00:00] PATIENT BOT: My date of birth is June 6, 1991.

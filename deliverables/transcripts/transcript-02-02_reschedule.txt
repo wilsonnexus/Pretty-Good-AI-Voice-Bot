@@ -1,0 +1,16 @@
+[2026-06-27T07:43:37.590391+00:00] PGAI AGENT: This call may be recorded for quality and training purposes.
+[2026-06-27T07:43:40.486555+00:00] PATIENT BOT: Hi, Say you need to reschedule an existing appointment because of a work conflict.
+[2026-06-27T07:43:52.594955+00:00] PGAI AGENT: I can help with that before we get started. Would you like to create a demo patient profile?
+[2026-06-27T07:43:52.896451+00:00] PATIENT BOT: That sounds good. My goal is: Reschedule an appointment from Friday at 3 PM to the following Monday after 2 PM. Can you help me with that?
+[2026-06-27T07:44:10.636844+00:00] PGAI AGENT: I can help with that. May I have your first and last name to create your demo patient profile.
+[2026-06-27T07:44:10.913873+00:00] PATIENT BOT: My name is Jamie Lee.
+[2026-06-27T07:44:30.954985+00:00] PGAI AGENT: Patient profile is set up and your date of birth is July. 4th 2000 for demo purposes. How may I help you today?
+[2026-06-27T07:44:31.120986+00:00] PATIENT BOT: My date of birth is May 4, 1985.
+[2026-06-27T07:44:44.513367+00:00] PGAI AGENT: You don't have any upcoming appointment scheduled right now. Would you like to book a new appointment for Monday after 2:00 p.m.
+[2026-06-27T07:44:44.839720+00:00] PATIENT BOT: My date of birth is May 4, 1985.
+[2026-06-27T07:44:54.098821+00:00] PGAI AGENT: thanks for clarifying your date of birth as May 4th 1985
+[2026-06-27T07:44:54.295717+00:00] PATIENT BOT: My date of birth is May 4, 1985.
+[2026-06-27T07:45:08.609174+00:00] PGAI AGENT: I have your date of birth as May 4th 1985. You don't have any appointments to reschedule. Would you like to book a new appointment for Monday after 2:00 p.m.?
+[2026-06-27T07:45:08.775171+00:00] PATIENT BOT: My date of birth is May 4, 1985.
+[2026-06-27T07:45:23.303741+00:00] PGAI AGENT: I have your date of birth as May 4th 1985. There are no appointments to reschedule. Would you like to schedule a new appointment for Monday after 2:00 p.m.?
+[2026-06-27T07:45:23.612918+00:00] PATIENT BOT: My date of birth is May 4, 1985.
