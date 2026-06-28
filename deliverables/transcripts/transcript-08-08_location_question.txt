@@ -1,14 +1,12 @@
-[2026-06-27T23:08:18.608999+00:00] PGAI AGENT: This call may be recorded for quality and training purposes, but Espanol.
-[2026-06-27T23:08:18.631107+00:00] PATIENT BOT: Hi, which location has parking and wheelchair access?
-[2026-06-27T23:08:28.040199+00:00] PGAI AGENT: Pretty good AI. Am I speaking with Jamie?
-[2026-06-27T23:08:28.055854+00:00] PATIENT BOT: Yes, this is Jamie Lee.
-[2026-06-27T23:08:37.547524+00:00] PGAI AGENT: Please provide your date of birth.
-[2026-06-27T23:08:37.562235+00:00] PATIENT BOT: Sure, my date of birth is July 4, 2000.
-[2026-06-27T23:08:48.427943+00:00] PGAI AGENT: How can I help you today?
-[2026-06-27T23:08:48.447110+00:00] PATIENT BOT: Before I schedule, I want to know which location has parking and wheelchair access.
-[2026-06-27T23:09:08.468816+00:00] PGAI AGENT: Pivot Point Orthopedics at 220 Athens Way in Nashville. Has free patient parking. The building is wheelchair accessible. Would you like to schedule your appointment there?
-[2026-06-27T23:09:08.482033+00:00] PATIENT BOT: Before I schedule, I want to know which location has parking and wheelchair access.
-[2026-06-27T23:09:27.301700+00:00] PGAI AGENT: Hit a point Orthopedics at 220 Athens Way, in Nashville, offers both free parking and wheelchair access. If you need details about another location, let me know. Would you like to book your appointment at this location?
-[2026-06-27T23:09:27.317332+00:00] PATIENT BOT: Before I schedule, I want to know which location has parking and wheelchair access.
-[2026-06-27T23:09:43.119075+00:00] PGAI AGENT: Get the point Orthopedics at 220, Athens Way in Nashville, has both free parking and wheelchair access. If you're looking for a different location, just let me know.
-[2026-06-27T23:09:43.132677+00:00] PATIENT BOT: Thank you, that helps. Goodbye.
+[2026-06-28T01:10:07.598167+00:00] PGAI AGENT: This call may be recorded for quality and training purposes.
+[2026-06-28T01:10:07.626486+00:00] PATIENT BOT: Hi, which location has parking and wheelchair access?
+[2026-06-28T01:10:16.465566+00:00] PGAI AGENT: AI. Am I speaking with Jamie?
+[2026-06-28T01:10:16.480757+00:00] PATIENT BOT: Yes, this is Jamie Lee.
+[2026-06-28T01:10:25.473349+00:00] PGAI AGENT: Please provide your date of birth.
+[2026-06-28T01:10:25.494938+00:00] PATIENT BOT: Sure, my date of birth is July 4, 2000.
+[2026-06-28T01:10:36.524235+00:00] PGAI AGENT: Great Amy. How can I help you today?
+[2026-06-28T01:10:36.544804+00:00] PATIENT BOT: Before I schedule, I want to know which location has parking and wheelchair access.
+[2026-06-28T01:10:55.358459+00:00] PGAI AGENT: Pivot Point Orthopedics at 220, Athens Way in Nashville, has free patient parking and his wheelchair accessible. Let me know if you want more details or if you're ready to schedule.
+[2026-06-28T01:10:55.372503+00:00] PATIENT BOT: Thank you. Could you repeat the address once slowly so I can write it down?
+[2026-06-28T01:11:12.307494+00:00] PGAI AGENT: Sure, the address is Pivot Point Orthopedics, 220, Athens Way Suite, 200 Nashville.
+[2026-06-28T01:11:12.349110+00:00] PATIENT BOT: Got it. Thank you, goodbye.

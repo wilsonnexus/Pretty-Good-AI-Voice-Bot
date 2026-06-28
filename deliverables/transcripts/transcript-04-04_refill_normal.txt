@@ -1,16 +1,12 @@
-[2026-06-27T22:56:18.133860+00:00] PGAI AGENT: This call may be recorded for quality and training purposes.
-[2026-06-27T22:56:18.160036+00:00] PATIENT BOT: Hi, I am calling for a refill of my lisinopril 10 milligram prescription.
-[2026-06-27T22:56:27.226306+00:00] PGAI AGENT: My speeding with Jamie.
-[2026-06-27T22:56:27.240349+00:00] PATIENT BOT: Yes, this is Jamie Lee.
-[2026-06-27T22:56:33.712567+00:00] PGAI AGENT: Please provide your date of birth.
-[2026-06-27T22:56:33.726199+00:00] PATIENT BOT: Sure, my date of birth is July 4, 2000.
-[2026-06-27T22:56:44.984415+00:00] PGAI AGENT: Great Jamie. How can I help you today?
-[2026-06-27T22:56:45.003908+00:00] PATIENT BOT: I need a refill for lisinopril 10 milligrams. I have two pills left, and I use CVS on Main Street. How long does it usually take?
-[2026-06-27T22:57:06.463775+00:00] PGAI AGENT: Let me get your lisinopril refill. Started 1 moment while I process your request, how many days of lisinopril 10 mg? Do you have left? Here? Are you out? Just let me know.
-[2026-06-27T22:57:06.481880+00:00] PATIENT BOT: I just want to know how long the refill usually takes.
-[2026-06-27T22:57:21.359740+00:00] PGAI AGENT: Recent ALS are usually processed within 1 to 2 business days. Would you like to continue with your lisinopril refill request?
-[2026-06-27T22:57:21.375940+00:00] PATIENT BOT: I just want to know how long the refill usually takes.
-[2026-06-27T22:57:30.403309+00:00] PGAI AGENT: It typically takes 1 to 2 business days for a refill to be processed.
-[2026-06-27T22:57:30.419500+00:00] PATIENT BOT: I just want to know how long the refill usually takes.
-[2026-06-27T22:57:42.509076+00:00] PGAI AGENT: (No clear speech detected.)
-[2026-06-27T22:57:42.523130+00:00] PATIENT BOT: I need a refill for lisinopril 10 milligrams, once daily, sent to CVS on Main Street.
+[2026-06-28T00:58:07.905101+00:00] PGAI AGENT: Call may be recorded for quality and training purposes.
+[2026-06-28T00:58:07.921696+00:00] PATIENT BOT: Hi, I am calling for a refill of my lisinopril 10 milligram prescription.
+[2026-06-28T00:58:16.522167+00:00] PGAI AGENT: Jamie.
+[2026-06-28T00:58:16.552342+00:00] PATIENT BOT: I need a refill for lisinopril 10 milligrams, once daily, sent to CVS on Main Street.
+[2026-06-28T00:58:30.209490+00:00] PGAI AGENT: Can you please provide your date of birth?
+[2026-06-28T00:58:30.225789+00:00] PATIENT BOT: Sure, my date of birth is July 4, 2000.
+[2026-06-28T00:58:38.552501+00:00] PGAI AGENT: Thank you.
+[2026-06-28T00:58:38.574816+00:00] PATIENT BOT: I need a refill for lisinopril 10 milligrams, once daily, sent to CVS on Main Street.
+[2026-06-28T00:58:54.726278+00:00] PGAI AGENT: How many days of lisinopril do you have left? If you are already out, just let me know.
+[2026-06-28T00:58:54.743823+00:00] PATIENT BOT: I have two pills left.
+[2026-06-28T00:59:08.944191+00:00] PGAI AGENT: I have 2 days left for your medication. I have your number as 716-419-3635. If that correct for a call back.
+[2026-06-28T00:59:08.958285+00:00] PATIENT BOT: I think I already gave the details. Thank you for checking; I will follow up with the office. Goodbye.

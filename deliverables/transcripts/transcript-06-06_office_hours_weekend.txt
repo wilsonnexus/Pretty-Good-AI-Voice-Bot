@@ -1,12 +1,16 @@
-[2026-06-27T23:02:18.973396+00:00] PGAI AGENT: This call may be recorded for quality and training purposes.
-[2026-06-27T23:02:18.994845+00:00] PATIENT BOT: Hi, can I come in Sunday at 10 AM for a checkup?
-[2026-06-27T23:02:27.622224+00:00] PGAI AGENT: AI. Am I speaking with Jamie?
-[2026-06-27T23:02:27.635461+00:00] PATIENT BOT: Yes, this is Jamie Lee.
-[2026-06-27T23:02:37.143846+00:00] PGAI AGENT: Please provide your date of birth.
-[2026-06-27T23:02:37.157394+00:00] PATIENT BOT: Sure, my date of birth is July 4, 2000.
-[2026-06-27T23:02:47.442433+00:00] PGAI AGENT: How can I help you today?
-[2026-06-27T23:02:47.461776+00:00] PATIENT BOT: Can I come in Sunday at 10 AM for a checkup?
-[2026-06-27T23:03:04.460446+00:00] PGAI AGENT: The clinic is closed on Sundays. Would you like to schedule your check-up for another day? We have openings during the week. Do you have a preferred day or time?
-[2026-06-27T23:03:04.477977+00:00] PATIENT BOT: Okay, if Sunday is not available, Monday or Tuesday morning works for me.
-[2026-06-27T23:03:19.060873+00:00] PGAI AGENT: Just to confirm you'd like to book a general checkup which is a routine office. Visit is that correct?
-[2026-06-27T23:03:19.075977+00:00] PATIENT BOT: Thank you. Goodbye.
+[2026-06-28T01:04:07.458017+00:00] PGAI AGENT: This call may be recorded for quality and training purposes.
+[2026-06-28T01:04:07.478274+00:00] PATIENT BOT: Hi, can I come in Sunday at 10 AM for a checkup?
+[2026-06-28T01:04:16.628624+00:00] PGAI AGENT: Pretty good AI. Am I speaking with Jamie?
+[2026-06-28T01:04:16.642217+00:00] PATIENT BOT: Yes, this is Jamie Lee.
+[2026-06-28T01:04:23.413407+00:00] PGAI AGENT: Please provide your date of birth.
+[2026-06-28T01:04:23.428032+00:00] PATIENT BOT: Sure, my date of birth is July 4, 2000.
+[2026-06-28T01:04:34.689602+00:00] PGAI AGENT: Great Jamie. How can I help you today?
+[2026-06-28T01:04:34.708646+00:00] PATIENT BOT: Can I come in Sunday at 10 AM for a checkup?
+[2026-06-28T01:04:49.831138+00:00] PGAI AGENT: The clinic is closed on Sundays. Would you like to come in on a weekday? Instead if you have a preferred day or time let me know.
+[2026-06-28T01:04:49.848181+00:00] PATIENT BOT: Okay, if Sunday is not available, Monday or Tuesday morning works for me.
+[2026-06-28T01:04:58.870790+00:00] PGAI AGENT: You mentioned wanting a checkup?
+[2026-06-28T01:04:58.884119+00:00] PATIENT BOT: I wanted to check if Sunday at 10 AM is available for a checkup.
+[2026-06-28T01:05:11.775217+00:00] PGAI AGENT: (No clear speech detected.)
+[2026-06-28T01:05:11.789261+00:00] PATIENT BOT: I wanted to know if Sunday at 10 AM is available for a checkup.
+[2026-06-28T01:05:30.139568+00:00] PGAI AGENT: So many appointments are not available but I can help you book a check-up on Monday or Tuesday morning. Would you like to schedule a general office visit for routine care
+[2026-06-28T01:05:30.153159+00:00] PATIENT BOT: Thank you for checking. Goodbye.

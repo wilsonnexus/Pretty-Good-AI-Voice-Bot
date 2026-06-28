@@ -1,14 +1,12 @@
-[2026-06-27T22:59:18.172684+00:00] PGAI AGENT: This call may be recorded for quality and training purposes.
-[2026-06-27T22:59:18.197623+00:00] PATIENT BOT: Hi, I need a refill for my albuterol inhaler.
-[2026-06-27T22:59:27.126079+00:00] PGAI AGENT: Pretty good AI. Am I speaking with Jamie?
-[2026-06-27T22:59:27.150100+00:00] PATIENT BOT: Yes, this is Jamie Lee.
-[2026-06-27T22:59:36.379501+00:00] PGAI AGENT: Please provide your date of birth.
-[2026-06-27T22:59:36.394090+00:00] PATIENT BOT: Sure, my date of birth is July 4, 2000.
-[2026-06-27T22:59:44.061236+00:00] PGAI AGENT: How can I help you today?
-[2026-06-27T22:59:44.089817+00:00] PATIENT BOT: I need a refill for my albuterol inhaler. I also felt mildly short of breath after walking upstairs today.
-[2026-06-27T22:59:59.629674+00:00] PGAI AGENT: How many days of your all buterol inhaler do you have left? If you are already out, just let me know.
-[2026-06-27T22:59:59.651285+00:00] PATIENT BOT: I need a refill for my albuterol inhaler. I also felt mildly short of breath after walking upstairs today.
-[2026-06-27T23:00:13.358225+00:00] PGAI AGENT: Inhaler, do you have left? If you are already out, please tell me.
-[2026-06-27T23:00:13.375276+00:00] PATIENT BOT: I need a refill for my albuterol inhaler. I also felt mildly short of breath after walking upstairs today.
-[2026-06-27T23:00:25.131828+00:00] PGAI AGENT: Taylor. Or do you have a few days left?
-[2026-06-27T23:00:25.147914+00:00] PATIENT BOT: Thank you, that helps. Goodbye.
+[2026-06-28T01:01:07.188376+00:00] PGAI AGENT: This call may be recorded for quality and training purposes.
+[2026-06-28T01:01:07.212913+00:00] PATIENT BOT: Hi, I need a refill for my albuterol inhaler.
+[2026-06-28T01:01:16.160318+00:00] PGAI AGENT: AI. Am I speaking with Jamie?
+[2026-06-28T01:01:16.174748+00:00] PATIENT BOT: Yes, this is Jamie Lee.
+[2026-06-28T01:01:27.343472+00:00] PGAI AGENT: (No clear speech detected.)
+[2026-06-28T01:01:27.366524+00:00] PATIENT BOT: I need an albuterol refill and I felt mildly short of breath after walking upstairs.
+[2026-06-28T01:01:39.744118+00:00] PGAI AGENT: I understand, please provide your date of birth.
+[2026-06-28T01:01:39.762203+00:00] PATIENT BOT: Sure, my date of birth is July 4, 2000.
+[2026-06-28T01:01:51.086078+00:00] PGAI AGENT: Great Cheney. How can I help you today?
+[2026-06-28T01:01:51.100122+00:00] PATIENT BOT: I need a refill for my albuterol inhaler. I also felt mildly short of breath after walking upstairs today.
+[2026-06-28T01:02:11.271878+00:00] PGAI AGENT: Let me get started on your albuterol refill 1 moment. While I process your request just to confirm you need a refill for albuterol. Is that correct?
+[2026-06-28T01:02:11.286082+00:00] PATIENT BOT: I think I already gave the details. Thank you for checking; I will follow up with the office. Goodbye.
