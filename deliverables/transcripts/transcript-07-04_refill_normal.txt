@@ -1,0 +1,25 @@
+[2026-06-28T05:41:19.183823+00:00] PGAI AGENT: this call may be recorded for quality and training purposes, but Thanks for calling Pivot Point Orthopedics part of pretty good AI. I'm I think it with Jamie
+[2026-06-28T05:41:32.091353+00:00] PGAI AGENT: Thanks for calling Pivot Point Orthopedics. Is this Jamie?
+[2026-06-28T05:41:32.110351+00:00] PATIENT BOT: Yes, this is Jamie Lee.
+[2026-06-28T05:41:40.892344+00:00] PGAI AGENT: Please provide your date of birth.
+[2026-06-28T05:41:40.910304+00:00] PATIENT BOT: Sure, my date of birth is July 4, 2000.
+[2026-06-28T05:41:51.476902+00:00] PGAI AGENT: Great Jamie. How can I help you today?
+[2026-06-28T05:41:52.979329+00:00] PATIENT BOT: Hi, I need a refill for my lisinopril 10 milligrams, please. I have about two days left.
+[2026-06-28T05:42:09.056181+00:00] PGAI AGENT: Thanks for letting me know to confirm. You need a refill for lisinopril 10 milligrams, correct?
+[2026-06-28T05:42:10.298188+00:00] PATIENT BOT: Yes, that's correct. I need the refill for lisinopril 10 milligrams.
+[2026-06-28T05:42:21.366566+00:00] PGAI AGENT: Do you have left? If you are already out, just let me know.
+[2026-06-28T05:42:22.497278+00:00] PATIENT BOT: I have two pills left, so about two days' worth.
+[2026-06-28T05:42:38.676747+00:00] PGAI AGENT: Got it. I have your number as 7164193635. Is that correct for a call back?
+[2026-06-28T05:42:38.695903+00:00] PATIENT BOT: Yes, that is the best callback number.
+[2026-06-28T05:42:52.780693+00:00] PGAI AGENT: Is there anything else you'd like the team to know about your refill request, for example, any symptoms or urgency?
+[2026-06-28T05:42:54.360545+00:00] PATIENT BOT: I don't have any symptoms or urgency at the moment. Just need the refill, please.
+[2026-06-28T05:43:26.077088+00:00] PGAI AGENT: 1 moment, while I process your license, a pro refill request, please hold on. Could you please provide the name of the pharmacy you want to use for your medication? If you know, the address City or any details like cross streets or nearby stores? That would help too if you have their phone or fax number, please share that as well.
+[2026-06-28T05:43:26.106444+00:00] PATIENT BOT: Please send it to CVS on Main Street.
+[2026-06-28T05:43:46.967613+00:00] PGAI AGENT: Thanks, is that the CDs on Main Street, in your city? Could you tell me which city and state it's in, or share the ZIP code? If you know it any extra details like a nearby Landmark or cross street would also help make sure we have the right location.
+[2026-06-28T05:43:48.334620+00:00] PATIENT BOT: Yes, it's CVS on Main Street in Springfield, Massachusetts. The ZIP code is 01103.
+[2026-06-28T05:44:05.761793+00:00] PGAI AGENT: just to confirm is this, the CVS Pharmacy at 991 Main Street Springfield, Zip Code 01103,
+[2026-06-28T05:44:05.778766+00:00] PATIENT BOT: Sorry, let me clarify. please send it to CVS on Main Street.
+[2026-06-28T05:44:18.953198+00:00] PGAI AGENT: Please let me know which CVS location you want to use or share any details, that can help me find the right 1.
+[2026-06-28T05:44:20.239701+00:00] PATIENT BOT: I need the CVS located at 991 Main Street, Springfield, Massachusetts, ZIP code 01103.
+[2026-06-28T05:44:45.563980+00:00] PGAI AGENT: I've documented your refill request for licenta pro. Our Clinic support team will review it and get back to you. As soon as they can. Is there anything else I can help with?
+[2026-06-28T05:44:46.973167+00:00] PATIENT BOT: Thank you for your help. I will follow up with the office if needed. Goodbye.

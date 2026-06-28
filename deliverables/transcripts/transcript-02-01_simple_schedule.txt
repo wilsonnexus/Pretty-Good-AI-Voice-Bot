@@ -1,0 +1,7 @@
+[2026-06-28T05:31:55.555842+00:00] PATIENT BOT: I'd like to schedule a new patient annual checkup, preferably for next Tuesday or Wednesday morning.
+[2026-06-28T05:32:13.633551+00:00] PGAI AGENT: Just to confirm your new patient and want to schedule your first visit for an annual checkup, is that correct?
+[2026-06-28T05:32:15.256961+00:00] PATIENT BOT: Yes, that's correct. I'm looking to schedule it for next Tuesday or Wednesday morning.
+[2026-06-28T05:32:36.320057+00:00] PGAI AGENT: it looks like you already have a new patient annual checkup appointment brought If you'd like, I can help you reschedule or cancel it, would you like to make a change to your existing appointment?
+[2026-06-28T05:32:37.339220+00:00] PATIENT BOT: I understand I have an appointment already. Please keep the current booking instead of creating a duplicate.
+[2026-06-28T05:32:51.721795+00:00] PGAI AGENT: Current appointment to next Tuesday or Wednesday morning. Or do you want to keep your existing time?
+[2026-06-28T05:32:52.931645+00:00] PATIENT BOT: I’d like to keep my existing appointment, please. Thank you, goodbye.

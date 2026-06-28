@@ -1,0 +1,20 @@
+[2026-06-28T05:35:18.406601+00:00] PGAI AGENT: This call may be recorded for quality and training purposes. Thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Am I speaking with Janie?
+[2026-06-28T05:35:18.425791+00:00] PATIENT BOT: Yes, this is Jamie Lee.
+[2026-06-28T05:35:26.028142+00:00] PGAI AGENT: Please provide your date of birth.
+[2026-06-28T05:35:26.050154+00:00] PATIENT BOT: Sure, my date of birth is July 4, 2000.
+[2026-06-28T05:35:38.921554+00:00] PGAI AGENT: Okay, I hope you today.
+[2026-06-28T05:35:40.324490+00:00] PATIENT BOT: I'm doing well, thank you. I need to reschedule my appointment due to a work conflict.
+[2026-06-28T05:36:07.107812+00:00] PGAI AGENT: You have 2 upcoming appointments on Tuesday, July, 7th, 1 is at 3:30 p.m. with the big new Lakosky MD, and the other is at 4:30 p.m. with duvie, Howser, which appointment would you like to reschedule?
+[2026-06-28T05:36:08.570961+00:00] PATIENT BOT: I need to reschedule the appointment with Lakosky MD at 3:30 p.m.
+[2026-06-28T05:36:33.417763+00:00] PGAI AGENT: The next available appointment with Z, big new lucoski MD is on Tuesday, July 7th at 9:30 a.m. there are also openings at 2 p.m. and 3 p.m. that day. Would any of these times work for you?
+[2026-06-28T05:36:35.128471+00:00] PATIENT BOT: I prefer an appointment on Monday after 2 PM. If that's not available, could you suggest the closest weekday afternoon after 2 PM?
+[2026-06-28T05:37:02.928215+00:00] PGAI AGENT: The closest weekday afternoon after 2:00 p.m. is Tuesday, July 7th, at 2 p.m. or 2:30 p.m. there is also an opening on Wednesday, July 8th at 2. P.m. would you like to book 1 of these times?
+[2026-06-28T05:37:04.643905+00:00] PATIENT BOT: I would like to book the appointment on Tuesday, July 7th at 2:30 p.m.
+[2026-06-28T05:37:23.508633+00:00] PGAI AGENT: Just to confirm, you want to move your appointment with Ziggy new lucosky, MD to Tuesday, July 7th at 2:30 p.m. in Nashville. Is that correct?
+[2026-06-28T05:37:24.621638+00:00] PATIENT BOT: Yes, that's correct. I want to move my appointment to Tuesday, July 7th at 2:30 p.m.
+[2026-06-28T05:37:37.740501+00:00] PGAI AGENT: Rescheduling. You mentioned a work. Conflict, would you like me to note that?
+[2026-06-28T05:37:38.902441+00:00] PATIENT BOT: Yes, please note that I have a work conflict.
+[2026-06-28T05:38:02.625606+00:00] PGAI AGENT: Your appointment has been rescheduled for Tuesday, July 7th at 2:30 p.m. with Dr. The big new lucasi, would you like me to send you a text message with these details?
+[2026-06-28T05:38:04.182593+00:00] PATIENT BOT: Yes, please send me a text message with those details.
+[2026-06-28T05:38:18.802407+00:00] PGAI AGENT: You'll get a text with your new appointment details soon. Is there anything else I can help you with today?
+[2026-06-28T05:38:20.628391+00:00] PATIENT BOT: No, that's all for now, thank you!. Thank you, goodbye.

@@ -1,0 +1,25 @@
+[2026-06-28T05:44:18.664996+00:00] PGAI AGENT: This call may be recorded for quality and training purposes. Thanks for calling Pivot Point Orthopedics part of pretty good. AI my speaking with Jamie
+[2026-06-28T05:44:33.422768+00:00] PGAI AGENT: Hi, thanks for calling Pivot Point Orthopedics. Is this Jamie? How can I help you today?
+[2026-06-28T05:44:33.436780+00:00] PATIENT BOT: Yes, this is Jamie Lee.
+[2026-06-28T05:44:42.252453+00:00] PGAI AGENT: Please provide your date of birth.
+[2026-06-28T05:44:42.269451+00:00] PATIENT BOT: Sure, my date of birth is July 4, 2000.
+[2026-06-28T05:44:53.347917+00:00] PGAI AGENT: Great Jamie. How can I help you today?
+[2026-06-28T05:44:54.818345+00:00] PATIENT BOT: I need a refill for my albuterol inhaler, please. I have one or two doses left.
+[2026-06-28T05:45:09.049727+00:00] PGAI AGENT: Thanks for letting me know to confirm. You need a refill for your albuterol inhaler, correct?
+[2026-06-28T05:45:10.320247+00:00] PATIENT BOT: Yes, that's correct. I need the refill for my albuterol inhaler.
+[2026-06-28T05:45:21.970610+00:00] PGAI AGENT: Buterol inhaler, do you have left? If you are already out, just let me know.
+[2026-06-28T05:45:21.984618+00:00] PATIENT BOT: I have about one or two doses left.
+[2026-06-28T05:45:43.346905+00:00] PGAI AGENT: Understood, although that you have about 1 day left, what is the best phone number for staff to call you back about this refill? I have your number is 716419. 3635. Is that correct?
+[2026-06-28T05:45:43.370615+00:00] PATIENT BOT: Yes, that is the best callback number.
+[2026-06-28T05:45:57.741504+00:00] PGAI AGENT: Is there anything else you'd like to staff to know about your refill request, for example, any symptoms or urgency?
+[2026-06-28T05:45:59.749625+00:00] PATIENT BOT: I felt mildly short of breath after walking upstairs today, but I don't have chest pain and it's not severe right now.
+[2026-06-28T05:46:26.646846+00:00] PGAI AGENT: Could you please provide the name of the pharmacy? You want to use for your medication? Nick, you know, the address City or any details like cross streets or nearby stores that would help too. If you have their phone or fax number, please share that as well.
+[2026-06-28T05:46:26.662929+00:00] PATIENT BOT: Please send it to Walgreens on Pine Street.
+[2026-06-28T05:46:44.753933+00:00] PGAI AGENT: Can you tell me the city and state for the Walgreens on Pine Street? If you know the ZIP code that works too, this will help make sure your medication goes to the right location.
+[2026-06-28T05:46:45.988607+00:00] PATIENT BOT: It's in Springfield, Illinois, and the ZIP code is 62704.
+[2026-06-28T05:47:23.369970+00:00] PGAI AGENT: I do not see a Walgreens on Pine Street in Springfield with the ZIP code. 62704 here are some Walgreens locations in Springfield, Zip Code, 62704, 2020, South MacArthur Boulevard, 2305 West Monroe, Street 25500 South Koke Mill Road. To many of these match. The Walgreens you want to use if so which 1
+[2026-06-28T05:47:24.977338+00:00] PATIENT BOT: I meant the Walgreens at 2020 South MacArthur Boulevard. Can you send the refill there?
+[2026-06-28T05:47:50.237265+00:00] PGAI AGENT: Yes, I'm still here on the Walgreens at 2020. South MacArthur Boulevard in Springfield for your refill request. I'll send this to the clinic team so they can process your albuterol inhaler refill as soon as possible. Is there anything else you need help with today?
+[2026-06-28T05:47:51.536719+00:00] PATIENT BOT: No, that's all I need for now. Thank you for your help!
+[2026-06-28T05:48:07.154406+00:00] PGAI AGENT: Your refill request for the albuterol, inhaler is being sent to the clinic team. They will review it and contact you, if they need anything else.
+[2026-06-28T05:48:08.321385+00:00] PATIENT BOT: Thank you for your help. I will follow up with the office if needed. Goodbye.

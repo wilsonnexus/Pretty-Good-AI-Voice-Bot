@@ -1,0 +1,15 @@
+[2026-06-28T05:32:02.243525+00:00] PATIENT BOT: I need to fix my thing from last time.
+[2026-06-28T05:32:17.395945+00:00] PGAI AGENT: Can you tell me a bit more about what you need to fix from? Your last visit, is it about an appointment a medication or something else?
+[2026-06-28T05:32:19.593480+00:00] PATIENT BOT: I need to reschedule my follow-up appointment.
+[2026-06-28T05:32:42.844217+00:00] PGAI AGENT: You have 2 upcoming appointments on Tuesday, July, 7th. 1 is at 10:00 a.m. with Dr. Ziggy lucosky. And the other is at 4:30 p.m. with Dr. Doogie Howser, which 1 would you like to reschedule?
+[2026-06-28T05:32:44.001648+00:00] PATIENT BOT: I’d like to reschedule the appointment with Dr. Ziggy Lucosky at 10:00 a.m. for a weekday afternoon, please.
+[2026-06-28T05:33:12.004876+00:00] PGAI AGENT: The next available weekday afternoon with Dr. Ziggy lucosky is Tuesday, July 7th, at 3:30 p.m. I also have Wednesday July 8th at 2 pm and Thursday July 9th at 2 p.m. Would you like to reschedule to 1 of these times?
+[2026-06-28T05:33:13.669431+00:00] PATIENT BOT: I’d like to reschedule to Tuesday, July 7th, at 3:30 p.m. with Dr. Ziggy Lucosky, please.
+[2026-06-28T05:33:27.303619+00:00] PGAI AGENT: Can you tell me the reason you need to reschedule your appointment?
+[2026-06-28T05:33:29.242001+00:00] PATIENT BOT: I need to reschedule because I have a conflict with the original time. I'd like to confirm the appointment for Tuesday, July 7th, at 3:30 p.m. with Dr. Ziggy Lucosky.
+[2026-06-28T05:33:48.492969+00:00] PGAI AGENT: Day. July 7th, at 3:30 p.m. at Nashville, 220 Athens way. Is that correct?
+[2026-06-28T05:33:50.016762+00:00] PATIENT BOT: Yes, that's correct. Tuesday, July 7th, at 3:30 p.m. at Nashville, 220 Athens way.
+[2026-06-28T05:34:14.990693+00:00] PGAI AGENT: Your appointment with Dr. Ziggy Lukowski is now set for Tuesday, July 7th, at 3:30 p.m. at 220 Athens Way in Nashville. Would you like me to send you a text message with these details?
+[2026-06-28T05:34:16.622549+00:00] PATIENT BOT: Yes, please send me a text message with those details.
+[2026-06-28T05:34:31.610219+00:00] PGAI AGENT: You'll get a text with your updated appointment details soon. Is there anything else I can help you with today?
+[2026-06-28T05:34:32.984335+00:00] PATIENT BOT: No, that's all for now. Thank you for your help!. Thank you, goodbye.
