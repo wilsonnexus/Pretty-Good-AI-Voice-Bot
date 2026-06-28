@@ -1,12 +1,16 @@
-[2026-06-28T01:16:07.998654+00:00] PGAI AGENT: This call may be recorded for quality and training purposes.
-[2026-06-28T01:16:08.019679+00:00] PATIENT BOT: Hi, I need a same-week appointment.
-[2026-06-28T01:16:17.044447+00:00] PGAI AGENT: Part of pretty good. A am I speaking with Jamie?
-[2026-06-28T01:16:17.069467+00:00] PATIENT BOT: Yes, this is Jamie Lee.
-[2026-06-28T01:16:23.643976+00:00] PGAI AGENT: Please provide your date of birth.
-[2026-06-28T01:16:23.672124+00:00] PATIENT BOT: Sure, my date of birth is July 4, 2000.
-[2026-06-28T01:16:31.822686+00:00] PGAI AGENT: Great Jamie. How can I help you today?
-[2026-06-28T01:16:31.841277+00:00] PATIENT BOT: I need a same-week appointment. Sorry to interrupt, but I only have a minute.
-[2026-06-28T01:16:45.567937+00:00] PGAI AGENT: Looking to be seen for an urgent concern, like paying or injury, or is this a routine visit?
-[2026-06-28T01:16:45.588117+00:00] PATIENT BOT: It is routine, not urgent. I only have a minute, and I need any weekday after 4 PM this week.
-[2026-06-28T01:16:57.468382+00:00] PGAI AGENT: Routine care. Is that correct?
-[2026-06-28T01:16:57.482555+00:00] PATIENT BOT: I think I already gave the details. Thank you for checking; I will follow up with the office. Goodbye.
+[2026-06-28T02:26:04.430319+00:00] PGAI AGENT: This call may be recorded for quality and training purposes. Thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Am I speaking with Jamie?
+[2026-06-28T02:26:04.450364+00:00] PATIENT BOT: Hi, I need a same-week appointment.
+[2026-06-28T02:26:16.043417+00:00] PGAI AGENT: Can you please provide your date of birth?
+[2026-06-28T02:26:16.057467+00:00] PATIENT BOT: Sure, my date of birth is July 4, 2000.
+[2026-06-28T02:26:34.427055+00:00] PGAI AGENT: Thanks. Can you tell me a bit about the reason for your visit? Are you having an urgent issue? A routine checkup or something else?
+[2026-06-28T02:26:34.462156+00:00] PATIENT BOT: It is routine, not urgent. I only have a minute, and I need any weekday after 4 PM this week.
+[2026-06-28T02:26:48.525804+00:00] PGAI AGENT: For routine care. Is that correct?
+[2026-06-28T02:26:48.550816+00:00] PATIENT BOT: Yes, routine care is correct. I am open to any provider after 4 PM if available.
+[2026-06-28T02:27:02.631514+00:00] PGAI AGENT: Provider you'd like to see or are you open to the first available?
+[2026-06-28T02:27:02.646526+00:00] PATIENT BOT: Yes, I am open to any available provider.
+[2026-06-28T02:27:23.732684+00:00] PGAI AGENT: Let me check for the soonest. Available appointments this week for routine care. There are no open appointments for routine care this week. Would you like to look for openings early next week instead?
+[2026-06-28T02:27:23.749735+00:00] PATIENT BOT: Yes, routine care is correct. I am open to any provider after 4 PM if available.
+[2026-06-28T02:27:55.127287+00:00] PGAI AGENT: Let me check for available appointments with any provider after 4:00 p.m. early next week. The soonest appointments after 4:00 p.m. are on Tuesday. July, 7th. I have openings at 3 p.m. and 3:30 p.m. with Dr. Z big, new lucoski. Would you like to book 1 of these or should I check later in the week?
+[2026-06-28T02:27:55.145338+00:00] PATIENT BOT: Yes, that works. Please book it.
+[2026-06-28T02:28:25.444334+00:00] PGAI AGENT: You're all set for an in-person visit with Dr. Ziggy lucosky at Pivot Point Orthopedics on Tuesday, July 7th, at 3 p.m. please bring your phone to ID insurance card and a list of your current medications. If you have any Imaging discs, bring those too. Would you like a text with your appointment details?
+[2026-06-28T02:28:25.463424+00:00] PATIENT BOT: The best callback number is 555-0142.

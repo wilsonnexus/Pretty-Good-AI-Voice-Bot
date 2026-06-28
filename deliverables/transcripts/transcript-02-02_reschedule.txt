@@ -1,14 +1,14 @@
-[2026-06-28T00:52:06.377665+00:00] PGAI AGENT: This call may be recorded for quality and training purposes.
-[2026-06-28T00:52:06.413717+00:00] PATIENT BOT: Hi, I need to reschedule my appointment because of a work conflict.
-[2026-06-28T00:52:15.529929+00:00] PGAI AGENT: Am I speaking with Janie?
-[2026-06-28T00:52:15.553977+00:00] PATIENT BOT: Yes, this is Jamie Lee.
-[2026-06-28T00:52:25.044174+00:00] PGAI AGENT: Please provide your date of birth.
-[2026-06-28T00:52:25.060833+00:00] PATIENT BOT: Sure, my date of birth is July 4, 2000.
-[2026-06-28T00:52:36.105781+00:00] PGAI AGENT: How can I help you today?
-[2026-06-28T00:52:36.127977+00:00] PATIENT BOT: I need to reschedule my Friday 3 PM appointment because of a work conflict.
-[2026-06-28T00:52:56.443606+00:00] PGAI AGENT: I see you have an appointment on Tuesday. July 7th, at 4:30 p.m. with do the house or at Nashville 220 Athens Way is this the appointment you watch to reschedule?
-[2026-06-28T00:52:56.458699+00:00] PATIENT BOT: I need to reschedule my Friday 3 PM appointment to the following Monday after 2 PM.
-[2026-06-28T00:53:14.268806+00:00] PGAI AGENT: I do not see a Friday, 3:00 p.m. appointment for you. The only upcoming appointment I have is on Tuesday, July 7th, at 4:30 p.m.
-[2026-06-28T00:53:14.296986+00:00] PATIENT BOT: That's strange. I was told I had a Friday 3 PM appointment. Could you document a follow-up for the office to review it?
-[2026-06-28T00:53:34.505488+00:00] PGAI AGENT: I will document your request from the office to review 1 moment, while I add a note for the team.
-[2026-06-28T00:53:34.520511+00:00] PATIENT BOT: Yes, please document that I want to move the Friday 3 PM appointment to Monday after 2 PM. Thank you.
+[2026-06-28T02:02:03.607191+00:00] PGAI AGENT: this call may be recorded for quality and training purposes, but Thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Am I speaking with Jamie?
+[2026-06-28T02:02:03.633345+00:00] PATIENT BOT: Hi, I need to reschedule my appointment because of a work conflict.
+[2026-06-28T02:02:17.135201+00:00] PGAI AGENT: Can you please provide your date of birth?
+[2026-06-28T02:02:17.161812+00:00] PATIENT BOT: Sure, my date of birth is July 4, 2000.
+[2026-06-28T02:02:39.391065+00:00] PGAI AGENT: You have an appointment on Tuesday, July 7th, at 4:30 p.m. with duvie, Howser at Nashville, 220 Athens Way. Is this the appointment you want to reschedule?
+[2026-06-28T02:02:39.412701+00:00] PATIENT BOT: Yes, this is Jamie Lee.
+[2026-06-28T02:03:01.989613+00:00] PGAI AGENT: I have openings on Thursday, July 9th at 12:00 p.m. to 15 p.m. and 4:30 p.m. all at the Nashville location with dudy. Howser would any of these times work for you?
+[2026-06-28T02:03:02.017274+00:00] PATIENT BOT: I need to move it to the following Monday after 2 PM.
+[2026-06-28T02:03:22.534551+00:00] PGAI AGENT: There are no openings on Monday afternoon, July 13th. Would you like to try a different date or time? If you prefer, I can also connect you to the clinic for more help.
+[2026-06-28T02:03:22.549070+00:00] PATIENT BOT: I need to move it to the following Monday after 2 PM.
+[2026-06-28T02:03:43.033385+00:00] PGAI AGENT: There are no openings on Monday after the next several weeks. Would you like to try a different day, or time? Or should I connect you to the clinic for more help right now?
+[2026-06-28T02:03:43.049394+00:00] PATIENT BOT: I need to move it to the following Monday after 2 PM.
+[2026-06-28T02:04:00.646351+00:00] PGAI AGENT: There are still no openings on Monday. Afternoons. Would you like to try a different day or time or should I transfer you to the clinic for more help?
+[2026-06-28T02:04:00.662458+00:00] PATIENT BOT: Thanks for your help. I do not want to take more of your time, so I will follow up with the office if needed. Goodbye.
