@@ -1,14 +1,14 @@
-[2026-06-27T08:01:37.397565+00:00] PGAI AGENT: This call may be recorded for quality and training purposes, but Espanol.
-[2026-06-27T08:01:37.714610+00:00] PATIENT BOT: Hi, Ask about office location, parking, and wheelchair accessibility.
-[2026-06-27T08:01:47.488902+00:00] PGAI AGENT: Am I speaking with Jamie?
-[2026-06-27T08:01:47.813184+00:00] PATIENT BOT: That sounds good. My goal is: Ask which location has parking and wheelchair access before scheduling. Can you help me with that?
-[2026-06-27T08:02:04.611618+00:00] PGAI AGENT: How can I help you today? Are you calling about an appointment, a medication refill, or something else?
-[2026-06-27T08:02:04.856799+00:00] PATIENT BOT: That sounds good. My goal is: Ask which location has parking and wheelchair access before scheduling. Can you help me with that?
-[2026-06-27T08:02:23.690854+00:00] PGAI AGENT: I can help with that before I share details about our Clinic location and accessibility. I need to confirm your information for privacy.
-[2026-06-27T08:02:23.963234+00:00] PATIENT BOT: That sounds good. My goal is: Ask which location has parking and wheelchair access before scheduling. Can you help me with that?
-[2026-06-27T08:02:46.919118+00:00] PGAI AGENT: Yes, I can help Pivot Point Orthopedics at 1234 recovery. Way Suite, 200, Austin has free patient parking in his wheelchair, accessible. If you need more details or want to schedule, just let me know.
-[2026-06-27T08:02:47.245537+00:00] PATIENT BOT: That sounds good. My goal is: Ask which location has parking and wheelchair access before scheduling. Can you help me with that?
-[2026-06-27T08:03:07.237043+00:00] PGAI AGENT: Yes, I can help our clinic at 1234 recovery, Way Suite, 200. Austin has free parking and is fully wheelchair accessible.
-[2026-06-27T08:03:07.474804+00:00] PATIENT BOT: That sounds good. My goal is: Ask which location has parking and wheelchair access before scheduling. Can you help me with that?
-[2026-06-27T08:03:23.472867+00:00] PGAI AGENT: Yes, I can help Pivot Point Orthopedics at 1234 recovery way.
-[2026-06-27T08:03:23.657170+00:00] PATIENT BOT: Thank you, that helps. I appreciate it. Goodbye.
+[2026-06-27T23:08:18.608999+00:00] PGAI AGENT: This call may be recorded for quality and training purposes, but Espanol.
+[2026-06-27T23:08:18.631107+00:00] PATIENT BOT: Hi, which location has parking and wheelchair access?
+[2026-06-27T23:08:28.040199+00:00] PGAI AGENT: Pretty good AI. Am I speaking with Jamie?
+[2026-06-27T23:08:28.055854+00:00] PATIENT BOT: Yes, this is Jamie Lee.
+[2026-06-27T23:08:37.547524+00:00] PGAI AGENT: Please provide your date of birth.
+[2026-06-27T23:08:37.562235+00:00] PATIENT BOT: Sure, my date of birth is July 4, 2000.
+[2026-06-27T23:08:48.427943+00:00] PGAI AGENT: How can I help you today?
+[2026-06-27T23:08:48.447110+00:00] PATIENT BOT: Before I schedule, I want to know which location has parking and wheelchair access.
+[2026-06-27T23:09:08.468816+00:00] PGAI AGENT: Pivot Point Orthopedics at 220 Athens Way in Nashville. Has free patient parking. The building is wheelchair accessible. Would you like to schedule your appointment there?
+[2026-06-27T23:09:08.482033+00:00] PATIENT BOT: Before I schedule, I want to know which location has parking and wheelchair access.
+[2026-06-27T23:09:27.301700+00:00] PGAI AGENT: Hit a point Orthopedics at 220 Athens Way, in Nashville, offers both free parking and wheelchair access. If you need details about another location, let me know. Would you like to book your appointment at this location?
+[2026-06-27T23:09:27.317332+00:00] PATIENT BOT: Before I schedule, I want to know which location has parking and wheelchair access.
+[2026-06-27T23:09:43.119075+00:00] PGAI AGENT: Get the point Orthopedics at 220, Athens Way in Nashville, has both free parking and wheelchair access. If you're looking for a different location, just let me know.
+[2026-06-27T23:09:43.132677+00:00] PATIENT BOT: Thank you, that helps. Goodbye.

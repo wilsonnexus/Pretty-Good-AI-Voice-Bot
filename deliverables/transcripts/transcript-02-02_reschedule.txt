@@ -1,16 +1,14 @@
-[2026-06-27T07:43:37.590391+00:00] PGAI AGENT: This call may be recorded for quality and training purposes.
-[2026-06-27T07:43:40.486555+00:00] PATIENT BOT: Hi, Say you need to reschedule an existing appointment because of a work conflict.
-[2026-06-27T07:43:52.594955+00:00] PGAI AGENT: I can help with that before we get started. Would you like to create a demo patient profile?
-[2026-06-27T07:43:52.896451+00:00] PATIENT BOT: That sounds good. My goal is: Reschedule an appointment from Friday at 3 PM to the following Monday after 2 PM. Can you help me with that?
-[2026-06-27T07:44:10.636844+00:00] PGAI AGENT: I can help with that. May I have your first and last name to create your demo patient profile.
-[2026-06-27T07:44:10.913873+00:00] PATIENT BOT: My name is Jamie Lee.
-[2026-06-27T07:44:30.954985+00:00] PGAI AGENT: Patient profile is set up and your date of birth is July. 4th 2000 for demo purposes. How may I help you today?
-[2026-06-27T07:44:31.120986+00:00] PATIENT BOT: My date of birth is May 4, 1985.
-[2026-06-27T07:44:44.513367+00:00] PGAI AGENT: You don't have any upcoming appointment scheduled right now. Would you like to book a new appointment for Monday after 2:00 p.m.
-[2026-06-27T07:44:44.839720+00:00] PATIENT BOT: My date of birth is May 4, 1985.
-[2026-06-27T07:44:54.098821+00:00] PGAI AGENT: thanks for clarifying your date of birth as May 4th 1985
-[2026-06-27T07:44:54.295717+00:00] PATIENT BOT: My date of birth is May 4, 1985.
-[2026-06-27T07:45:08.609174+00:00] PGAI AGENT: I have your date of birth as May 4th 1985. You don't have any appointments to reschedule. Would you like to book a new appointment for Monday after 2:00 p.m.?
-[2026-06-27T07:45:08.775171+00:00] PATIENT BOT: My date of birth is May 4, 1985.
-[2026-06-27T07:45:23.303741+00:00] PGAI AGENT: I have your date of birth as May 4th 1985. There are no appointments to reschedule. Would you like to schedule a new appointment for Monday after 2:00 p.m.?
-[2026-06-27T07:45:23.612918+00:00] PATIENT BOT: My date of birth is May 4, 1985.
+[2026-06-27T22:50:17.642093+00:00] PGAI AGENT: This call may be recorded for quality and training purposes.
+[2026-06-27T22:50:17.658098+00:00] PATIENT BOT: Hi, I need to reschedule my appointment because of a work conflict.
+[2026-06-27T22:50:26.809597+00:00] PGAI AGENT: I am I speaking with Jamie,
+[2026-06-27T22:50:26.830149+00:00] PATIENT BOT: Yes, this is Jamie Lee.
+[2026-06-27T22:50:36.458249+00:00] PGAI AGENT: Please provide your date of birth.
+[2026-06-27T22:50:36.481266+00:00] PATIENT BOT: Sure, my date of birth is July 4, 2000.
+[2026-06-27T22:50:43.266856+00:00] PGAI AGENT: Great Jamie.
+[2026-06-27T22:50:43.289317+00:00] PATIENT BOT: I need to reschedule my Friday 3 PM appointment to the following Monday after 2 PM.
+[2026-06-27T22:51:03.238445+00:00] PGAI AGENT: I don't see any upcoming appointments for you right now. Would you like to book a new appointment for Monday after 2:00 p.m.?
+[2026-06-27T22:51:03.264238+00:00] PATIENT BOT: No thank you. I do not want a new appointment. I only want to reschedule my existing Friday 3 PM appointment.
+[2026-06-27T22:51:25.263971+00:00] PGAI AGENT: I don't see a Friday, 3 p.m. appointment on file for you. It's possible. It hasn't been scheduled yet, or there's a system issue. Would you like me to have our Clinic support team? Look into this and follow up with you?
+[2026-06-27T22:51:25.282019+00:00] PATIENT BOT: I need to reschedule my Friday 3 PM appointment to the following Monday after 2 PM.
+[2026-06-27T22:51:44.124089+00:00] PGAI AGENT: I still have the Friday. 3:00 p.m. appointment for you in the system. I can have our Clinic support team review this and get back to you as soon as possible. Would you like me to document your request for follow-up?
+[2026-06-27T22:51:44.148116+00:00] PATIENT BOT: Thank you, that helps. Goodbye.
