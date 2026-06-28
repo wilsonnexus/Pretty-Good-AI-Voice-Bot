@@ -1,50 +1,138 @@
 # Pretty Good AI Voice Bot Challenge
 
-This repo is a Python voice-bot caller for the Pretty Good AI AI Engineering Challenge.
-It calls only the official assessment line: `+1-805-439-8008`.
+This repository is my Python voice-bot caller for the Pretty Good AI AI Engineering Challenge.
 
-The bot acts as a realistic patient, listens to the Pretty Good AI agent, replies using short natural patient turns, records the calls, saves transcripts, and exports the required GitHub deliverables.
+The bot calls only the official assessment line:
 
-## What this includes
+```text
++1-805-439-8008
+```
 
-- Python Flask webhook app for Twilio voice calls
-- Twilio outbound call launcher locked to the assessment number
-- 12 realistic patient scenarios, with the first 10 covering the minimum requirement
-- Transcript logging with both sides of the conversation
-- Automatic MP3 recording download from Twilio recording callbacks
-- Export script for `deliverables/transcripts/`, `deliverables/recordings/`, and `deliverables/CALL_INDEX.md`
-- Bug report generator for candidate issues found in transcripts
-- Setup files: `.env.example`, `requirements.txt`, architecture doc, Loom guide
+It acts as a realistic patient, carries out healthcare-related test scenarios, records the calls, saves transcripts, exports deliverables, and generates a bug report from the conversations.
+
+## Submission Summary
+
+This submission includes:
+
+- Working Python voice bot code
+- Twilio outbound call launcher locked to the required assessment number
+- Flask webhook server for handling voice turns
+- Realistic patient scenarios for scheduling, rescheduling, cancellation, refills, insurance, office hours, location questions, unclear requests, and interruption handling
+- Call transcripts with both sides of the conversation
+- MP3 recordings of the calls
+- Bug report with severity, evidence, and expected behavior
+- Architecture document
+- `.env.example` showing required environment variables without exposing secrets
+
+The final deliverables include **10 complete calls** with both transcript and MP3 recording files, meeting the 10-call minimum requirement.
+
+## Repository Structure
+
+```text
+.
+├── README.md
+├── ARCHITECTURE.md
+├── .env.example
+├── requirements.txt
+├── pgai_voice_bot/
+│   ├── web.py
+│   ├── make_calls.py
+│   ├── scenarios.py
+│   ├── config.py
+│   ├── store.py
+│   ├── export_deliverables.py
+│   ├── analyze_bugs.py
+│   └── llm.py
+├── deliverables/
+│   ├── CALL_INDEX.md
+│   ├── transcripts/
+│   ├── recordings/
+│   └── bug_reports/
+├── scripts/
+└── tests/
+```
+
+## What the Bot Does
+
+The bot places outbound calls through Twilio and uses a Flask webhook server to control the conversation.
+
+For each call, the bot is given a patient scenario and a goal. It then responds to the Pretty Good AI agent using short, realistic patient turns instead of simply reading a fixed script. This makes the calls more like real patient interactions and allows the bot to test how the agent handles ambiguity, missing information, and edge cases.
+
+The bot records and stores:
+
+- Call metadata
+- Scenario name
+- Transcript turns
+- Twilio recording files
+- Exported MP3 recordings
+- Bug-analysis output
+
+## Scenarios Tested
+
+The main test scenarios include:
+
+1. Simple new-patient appointment scheduling
+2. Rescheduling an existing appointment
+3. Canceling an appointment without rescheduling
+4. Routine medication refill request
+5. Medication refill with potentially urgent symptoms
+6. Weekend office-hours scheduling edge case
+7. Insurance and billing question
+8. Location and accessibility question
+9. Unclear patient request requiring clarification
+10. Interruption / barge-in behavior
+
+These scenarios were chosen because they represent common healthcare voice-agent workflows while also testing failure modes such as unclear intent, unsafe medical escalation, identity mismatch, and poor turn-taking recovery.
+
+## Deliverables
+
+The main deliverables are in the `deliverables/` folder:
+
+```text
+deliverables/CALL_INDEX.md
+deliverables/transcripts/
+deliverables/recordings/
+deliverables/bug_reports/bug_report.md
+```
+
+`CALL_INDEX.md` lists every attempted call and whether its transcript and recording were successfully exported.
+
+The completed calls have:
+
+- A `.txt` transcript file
+- A `.mp3` recording file
+- A scenario label
+- A Twilio Call SID
+
+Calls marked `MISSING` were incomplete attempts and are not counted toward the final evaluated call set.
 
 ## Prerequisites
 
-1. Create a test account at `pgai.us/athena` to understand the product context. Do not call the number shown on its confirmation screen.
-2. Create a Twilio account and get:
-   - Account SID
-   - Auth Token
-   - One Twilio Voice-capable phone number in E.164 format, such as `+13334445555`
-3. Create an OpenAI API key. The bot can run without it, but the adaptive LLM patient mode and bug analysis are much better with it.
-4. Install ngrok or Cloudflare Tunnel so Twilio can reach your local Flask app.
+To run this project, you need:
 
-## Fast setup
+1. Python 3.10+
+2. A Twilio account
+3. One Twilio Voice-capable phone number
+4. ngrok or another public tunnel provider
+5. Optional: an OpenAI API key for adaptive patient responses and bug-analysis assistance
+
+You also need to create a test account at:
+
+```text
+pgai.us/athena
+```
+
+That gives product context for the patient experience. Do not call the number shown on that confirmation screen. This project is locked to the official assessment number only.
+
+## Environment Variables
+
+Copy the example environment file:
 
 ```bash
-git clone <your-new-github-repo-url>
-cd pgai_voice_bot_challenge
-python3 -m venv .venv
-source .venv/bin/activate
-pip install --upgrade pip
-pip install -r requirements.txt
 cp .env.example .env
 ```
 
-Edit `.env`:
-
-```bash
-nano .env
-```
-
-Set these values:
+Then fill in:
 
 ```bash
 TWILIO_ACCOUNT_SID=ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -52,108 +140,185 @@ TWILIO_AUTH_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 TWILIO_FROM_NUMBER=+1YOURTWILIONUMBER
 PUBLIC_BASE_URL=https://your-ngrok-url.ngrok-free.app
 OPENAI_API_KEY=sk-proj-your-key
+OPENAI_MODEL=gpt-4o-mini
+ASSESSMENT_NUMBER=+18054398008
 ```
 
-Leave this value unchanged:
+Do not change:
 
 ```bash
 ASSESSMENT_NUMBER=+18054398008
 ```
 
-## Run locally
+The code validates this value and refuses to call any other number.
 
-Terminal 1: start Flask.
+Do not commit `.env`.
+
+## Setup on macOS / Linux
+
+```bash
+git clone https://github.com/wilsonnexus/Pretty-Good-AI-Voice-Bot.git
+cd Pretty-Good-AI-Voice-Bot
+
+python3 -m venv .venv
+source .venv/bin/activate
+
+pip install --upgrade pip
+pip install -r requirements.txt
+
+cp .env.example .env
+```
+
+Then edit `.env` with your Twilio, ngrok, and optional OpenAI values.
+
+## Setup on Windows Git Bash
+
+```bash
+git clone https://github.com/wilsonnexus/Pretty-Good-AI-Voice-Bot.git
+cd Pretty-Good-AI-Voice-Bot
+
+python -m venv .venv
+source .venv/Scripts/activate
+
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+
+cp .env.example .env
+notepad .env
+```
+
+On Windows, the virtual environment activation path is:
+
+```bash
+source .venv/Scripts/activate
+```
+
+not:
 
 ```bash
 source .venv/bin/activate
+```
+
+## Running Locally
+
+Start the Flask webhook server:
+
+```bash
 python -m pgai_voice_bot.web
 ```
 
-Terminal 2: expose Flask publicly.
+In another terminal, expose port `5000` publicly:
 
 ```bash
 ngrok http 5000
 ```
 
-Copy the `https://...ngrok-free.app` URL into `.env` as `PUBLIC_BASE_URL`, then restart Flask.
-
-Terminal 3: run a dry run first.
+Copy the HTTPS ngrok forwarding URL into `.env` as:
 
 ```bash
-source .venv/bin/activate
+PUBLIC_BASE_URL=https://your-ngrok-url.ngrok-free.app
+```
+
+Then restart the Flask server.
+
+## Dry Run
+
+Before making real calls, run:
+
+```bash
 python -m pgai_voice_bot.make_calls --all --count 10 --dry-run
 ```
 
-Then place the real 10 calls sequentially. Default delay is 180 seconds so calls do not overlap.
+This verifies the configured scenarios and call plan without placing calls.
+
+## Making Real Calls
+
+To place the first 10 scenario calls:
 
 ```bash
 python -m pgai_voice_bot.make_calls --all --count 10 --delay 180
 ```
 
-You can also run one scenario while testing:
+The delay prevents calls from overlapping.
+
+A single scenario can also be tested:
 
 ```bash
 python -m pgai_voice_bot.make_calls 06_office_hours_weekend --delay 180
 ```
 
-## Export deliverables
+## Exporting Deliverables
 
-After the calls are complete and Twilio recording callbacks finish, run:
+After the calls finish and Twilio recording callbacks complete, run:
 
 ```bash
 python -m pgai_voice_bot.export_deliverables
 python -m pgai_voice_bot.analyze_bugs
 ```
 
-Review everything manually before submitting. The final files to commit are:
+Then review:
 
-```text
-deliverables/CALL_INDEX.md
-deliverables/transcripts/*.txt
-deliverables/recordings/*.mp3
-deliverables/bug_reports/bug_report.md
-ARCHITECTURE.md
-README.md
-.env.example
+```bash
+cat deliverables/CALL_INDEX.md
+cat deliverables/bug_reports/bug_report.md
 ```
 
-If `CALL_INDEX.md` says a recording is missing, wait a minute and run export again. If it is still missing, check Twilio Console > Monitor > Logs > Calls > Recordings.
+On Windows, you can open the deliverables folder with:
 
-## Scenarios
+```bash
+explorer deliverables
+```
 
-Run the first 10 for the minimum requirement:
+## Bug Report
 
-1. Simple new-patient appointment scheduling
-2. Reschedule an existing appointment
-3. Cancel appointment without rescheduling
-4. Routine medication refill request
-5. Refill plus potentially urgent symptom
-6. Weekend office-hours scheduling trap
-7. Insurance and billing question
-8. Location and accessibility question
-9. Unclear patient request that needs clarification
-10. Interruption / barge-in behavior
+The bug report is stored at:
 
-Extra scenarios:
+```text
+deliverables/bug_reports/bug_report.md
+```
 
-11. After-hours urgent vs non-urgent confusion
-12. Spanish language support request
+It includes candidate issues found during testing, including examples such as:
 
-## Submission checklist
+- Cancellation flow problems
+- Identity-verification weakness during refill flow
+- Missing urgent-care escalation for breathing symptoms
+- Office-hours validation issues
+- Inconsistent or unclear location/accessibility responses
+- Poor recovery from vague requests or interruptions
 
-- [ ] Public GitHub repo link
-- [ ] At least 10 full calls, typically 1 to 3 minutes each
-- [ ] Audio recordings in MP3 or OGG format
-- [ ] Text transcripts with both sides of each conversation
-- [ ] Bug report with clear severity/evidence/expected behavior
-- [ ] `README.md` setup/run instructions
-- [ ] `ARCHITECTURE.md` with 1 to 2 paragraphs
-- [ ] Loom walkthrough, max 5 minutes
-- [ ] Separate 5-minute screen recording showing AI-assisted debugging
-- [ ] The one caller phone number used, in E.164 format
+Each issue should be manually reviewed against the transcript and audio.
 
-## Safety guardrails
+## Design Choices
 
-The code hardcodes and validates the assessment number. It refuses to run if `ASSESSMENT_NUMBER` is changed from `+18054398008`. Do not use this project to call anyone else.
+I kept the design intentionally simple because the challenge prioritizes working calls, clear reasoning, and fast iteration over production-grade infrastructure.
 
-Do not commit `.env`, Twilio credentials, OpenAI keys, or real patient information.
+The main pieces are:
+
+- Twilio for outbound calling, speech input, and call recording
+- Flask for webhook endpoints
+- Scenario definitions for patient goals
+- Transcript storage for both sides of the conversation
+- Export scripts to create the required GitHub deliverables
+- Optional LLM support for more adaptive responses and bug analysis
+
+The bot is structured so that scenarios, call placement, webhook handling, exports, and bug analysis are separated into readable modules.
+
+## Safety Guardrails
+
+This project is for the Pretty Good AI assessment only.
+
+The code hardcodes and validates the assessment number:
+
+```text
++1-805-439-8008
+```
+
+It should not be used to call any other number.
+
+Do not commit:
+
+- `.env`
+- Twilio credentials
+- OpenAI API keys
+- Real patient information
+- Any private healthcare data
