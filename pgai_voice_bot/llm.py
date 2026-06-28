@@ -23,148 +23,172 @@ DEMO_PHONE = "555-0142"
 
 
 class PatientResponder:
-    """Scenario-aware patient responder for the assessment calls.
+    """Scenario-aware patient responder for live assessment calls.
 
-    The first version of this project used a very simple fallback that looked at
-    the entire conversation. Once the agent asked for date of birth, the fallback
-    kept repeating the DOB on every turn. That made the caller sound like a test
-    script instead of a patient.
+    This version is deterministic on purpose. The earlier attempts were more
+    flexible, but they sometimes repeated the same detail or ended the call
+    before accepting/declining an offered option. For this challenge, coherent
+    voice interaction is the first evaluation gate, so the live caller should be
+    predictable, short, and patient-like.
 
-    This version is intentionally deterministic for voice-call quality. It looks
-    only at the agent's latest turn, tracks what the patient has already said,
-    and returns short patient-like replies that keep each scenario moving.
-    OpenAI is still used by analyze_bugs.py, but live patient replies do not rely
-    on an LLM API call during the phone conversation.
+    The responder reads only the latest agent turn plus the patient history, then
+    chooses a concise patient response that advances the scenario. OpenAI is
+    still useful for offline bug analysis, but the live call no longer depends on
+    an LLM call at each turn.
     """
 
     def __init__(self) -> None:
         self.settings = get_settings(require_twilio=False)
 
     def next_reply(self, scenario: Scenario, transcript: list[dict[str, Any]], turn_index: int) -> BotDecision:
-        return self._scripted_reply(scenario, transcript, turn_index)
-
-    def _scripted_reply(self, scenario: Scenario, transcript: list[dict[str, Any]], turn_index: int) -> BotDecision:
         last_agent = last_text(transcript, "agent")
-        last_agent_l = normalize(last_agent)
-        patient_text = "\n".join(row.get("text", "") for row in transcript if row.get("speaker") == "patient")
-        patient_l = normalize(patient_text)
+        agent = normalize(last_agent)
+        patient_history = "\n".join(row.get("text", "") for row in transcript if row.get("speaker") == "patient")
+        patient = normalize(patient_history)
 
-        # First patient turn: never expose scenario instructions like "my goal is".
-        if not patient_text.strip() or turn_index == 0:
+        if not patient_history.strip() or turn_index == 0:
             return BotDecision(first_request(scenario.id), False, "first request")
 
-        # Identity and verification questions should be answered directly, then
-        # immediately steer back to the scenario if the same question repeats.
-        if asks_if_speaking_to_jamie(last_agent_l):
-            return BotDecision("Yes, this is Jamie Lee.", False, "identity confirmation")
+        # Identity checks are handled before scenario logic so the bot sounds like
+        # a real patient completing intake.
+        if asks_if_speaking_to_jamie(agent):
+            return self._dedupe("Yes, this is Jamie Lee.", False, "identity confirmation", patient, turn_index)
 
-        if asks_name(last_agent_l):
-            return BotDecision("My name is Jamie Lee.", False, "name provided")
+        if asks_name(agent):
+            return self._dedupe("My name is Jamie Lee.", False, "name provided", patient, turn_index)
 
-        if asks_dob(last_agent_l):
-            if count_mentions(patient_l, "july 4") >= 1:
-                return BotDecision(f"It is {DEMO_DOB}. {scenario_request(scenario.id)}", False, "dob repeated with intent")
+        if asks_dob(agent):
+            if count_mentions(patient, "july 4") >= 1:
+                return self._dedupe(f"It is {DEMO_DOB}.", False, "dob repeated once", patient, turn_index)
             return BotDecision(f"Sure, my date of birth is {DEMO_DOB}.", False, "dob provided")
 
-        if asks_phone(last_agent_l):
-            return BotDecision(f"The best callback number is {DEMO_PHONE}.", False, "phone provided")
+        if asks_phone(agent):
+            return self._dedupe(f"The best callback number is {DEMO_PHONE}.", False, "phone provided", patient, turn_index)
 
-        if no_clear_speech(last_agent_l):
-            return BotDecision(scenario_request(scenario.id), False, "agent did not hear clearly")
+        if no_clear_speech(agent):
+            # Repeat once if Twilio/agent did not hear clearly. After that, close
+            # gracefully instead of creating a loop.
+            return self._dedupe(scenario_request(scenario.id), False, "agent did not hear clearly", patient, turn_index)
 
-        # Scenario-specific handlers. These come after identity checks so the bot
-        # behaves like a real patient going through intake.
-        if scenario.id == "01_simple_schedule":
-            return handle_simple_schedule(last_agent_l, patient_l, turn_index)
-        if scenario.id == "02_reschedule":
-            return handle_reschedule(last_agent_l, patient_l, turn_index)
-        if scenario.id == "03_cancel":
-            return handle_cancel(last_agent_l, patient_l, turn_index)
-        if scenario.id == "04_refill_normal":
-            return handle_refill_normal(last_agent_l, patient_l, turn_index)
-        if scenario.id == "05_refill_urgent_symptom":
-            return handle_refill_urgent(last_agent_l, patient_l, turn_index)
-        if scenario.id == "06_office_hours_weekend":
-            return handle_weekend_hours(last_agent_l, patient_l, turn_index)
-        if scenario.id == "07_insurance_question":
-            return handle_insurance(last_agent_l, patient_l, turn_index)
-        if scenario.id == "08_location_question":
-            return handle_location(last_agent_l, patient_l, turn_index)
-        if scenario.id == "09_unclear_request":
-            return handle_unclear(last_agent_l, patient_l, turn_index)
-        if scenario.id == "10_interruption_barge_in":
-            return handle_interruption(last_agent_l, patient_l, turn_index)
+        handler = {
+            "01_simple_schedule": handle_simple_schedule,
+            "02_reschedule": handle_reschedule,
+            "03_cancel": handle_cancel,
+            "04_refill_normal": handle_refill_normal,
+            "05_refill_urgent_symptom": handle_refill_urgent,
+            "06_office_hours_weekend": handle_weekend_hours,
+            "07_insurance_question": handle_insurance,
+            "08_location_question": handle_location,
+            "09_unclear_request": handle_unclear,
+            "10_interruption_barge_in": handle_interruption,
+        }.get(scenario.id)
+
+        if handler:
+            decision = handler(agent, patient, turn_index)
+            return self._dedupe(decision.reply, decision.done, decision.notes, patient, turn_index)
 
         if turn_index >= 6:
-            return BotDecision("Thank you, that helps. Goodbye.", True, "max turns")
-        return BotDecision(scenario_request(scenario.id), False, "default scenario request")
+            return BotDecision("Thank you, goodbye.", True, "max turns")
+        return self._dedupe(scenario_request(scenario.id), False, "default scenario request", patient, turn_index)
+
+    def _dedupe(self, reply: str, done: bool, notes: str, patient: str, turn_index: int) -> BotDecision:
+        """Avoid saying the exact same sentence over and over.
+
+        One repeat is acceptable in a noisy voice call. More than that sounds
+        broken, so the caller exits politely and marks the call complete.
+        """
+        reply_norm = normalize(reply)
+        repeats = count_exact_patient_reply(patient, reply_norm)
+        if not done and repeats >= 1 and turn_index >= 4:
+            return BotDecision(
+                "I think I already gave the details. Thank you for checking; I will follow up with the office. Goodbye.",
+                True,
+                f"stopped repeated reply: {notes}",
+            )
+        return BotDecision(reply, done, notes)
 
 
 # ----------------------------- scenario handlers -----------------------------
 
 
 def handle_simple_schedule(agent: str, patient: str, turn_index: int) -> BotDecision:
-    if asks_how_help(agent) or asks_appointment_type(agent) or contains_any(agent, "what type", "what brings you"):
-        return BotDecision("I would like to schedule a new patient annual checkup.", False, "appointment type")
+    if offers_specific_slot(agent):
+        return BotDecision("Yes, please book that slot.", False, "accept offered appointment")
+    if contains_any(agent, "is that right", "is that correct", "just to confirm"):
+        return BotDecision("Yes, that is correct.", False, "confirm appointment type")
+    if contains_any(agent, "specific provider", "provider", "doctor", "first available"):
+        return BotDecision("I am open to the first available provider.", False, "provider preference")
     if contains_any(agent, "urgent", "pain", "injury", "emergency"):
         return BotDecision("It is not urgent. It is just a routine annual checkup.", False, "non urgent")
     if contains_any(agent, "when", "date", "time", "availability", "prefer"):
         return BotDecision("Next Tuesday or Wednesday morning would be best if either is available.", False, "availability")
-    if contains_any(agent, "confirm", "scheduled", "booked", "appointment is"):
-        return BotDecision("That works for me. Thank you, goodbye.", True, "confirmed")
-    return close_or_repeat("I would like to book a new patient annual checkup, preferably next Tuesday or Wednesday morning.", turn_index)
+    if contains_any(agent, "scheduled", "booked", "confirmed", "you are all set"):
+        return BotDecision("Great, thank you. Goodbye.", True, "appointment confirmed")
+    if asks_how_help(agent) or asks_appointment_type(agent) or contains_any(agent, "what type", "what brings you"):
+        return BotDecision("I would like to schedule a new patient annual checkup.", False, "appointment type")
+    return close_or_repeat("I would like to schedule a new patient annual checkup, preferably next Tuesday or Wednesday morning.", turn_index)
 
 
 def handle_reschedule(agent: str, patient: str, turn_index: int) -> BotDecision:
-    if contains_any(agent, "no appointment", "no appointments", "don't have", "do not have", "unable to proceed"):
-        return BotDecision("Okay, I understand. I was trying to move my Friday 3 PM appointment to Monday after 2 PM. I can call the office if you cannot see it.", True, "limitation reached")
+    if contains_any(agent, "document your request", "follow up with you", "support team", "clinic support"):
+        return BotDecision("Yes, please document that I want to move the Friday 3 PM appointment to Monday after 2 PM. Thank you.", True, "accept support follow up")
+    if contains_any(agent, "no appointment", "no appointments", "don't see", "do not see", "don't have", "do not have", "not on file", "unable to proceed"):
+        return BotDecision("That's strange. I was told I had a Friday 3 PM appointment. Could you document a follow-up for the office to review it?", False, "appointment not found")
     if contains_any(agent, "book a new", "schedule a new", "new appointment instead"):
-        return BotDecision("No thank you. I do not want a new appointment. I only want to reschedule my existing Friday 3 PM appointment.", False, "reject new appointment")
-    if contains_any(agent, "current", "existing", "which appointment", "what appointment"):
+        return BotDecision("No thank you. I only want to reschedule the existing Friday 3 PM appointment.", False, "reject new appointment")
+    if contains_any(agent, "current", "existing", "which appointment", "what appointment", "what time"):
         return BotDecision("It is my Friday 3 PM appointment with Dr. Patel.", False, "current appointment")
     if contains_any(agent, "when", "date", "time", "availability", "move"):
         return BotDecision("I need to move it to the following Monday after 2 PM.", False, "new time")
+    if contains_any(agent, "rescheduled", "changed", "all set"):
+        return BotDecision("Thank you, that works. Goodbye.", True, "rescheduled")
     if asks_how_help(agent):
         return BotDecision("I need to reschedule my Friday 3 PM appointment because of a work conflict.", False, "reschedule request")
-    if contains_any(agent, "confirm", "rescheduled", "changed"):
-        return BotDecision("Thank you, that works. Goodbye.", True, "confirmed")
     return close_or_repeat("I need to reschedule my Friday 3 PM appointment to the following Monday after 2 PM.", turn_index)
 
 
 def handle_cancel(agent: str, patient: str, turn_index: int) -> BotDecision:
-    if contains_any(agent, "new appointment", "book", "reschedule", "schedule") and contains_any(agent, "would you like", "instead", "right now"):
-        return BotDecision("No thank you. I only want to cancel the appointment and I do not want to reschedule today.", False, "decline reschedule")
-    if contains_any(agent, "no appointment", "no appointments", "don't have", "do not have"):
-        return BotDecision("Okay, thank you for checking. I will call back if needed. Goodbye.", True, "no appointment")
+    if contains_any(agent, "connect you", "representative", "patient support", "can't complete", "cannot complete"):
+        return BotDecision("Okay, please connect me with patient support. I still do not want to reschedule today. Thank you.", True, "support handoff accepted")
+    if contains_any(agent, "new appointment", "book", "reschedule", "schedule") and contains_any(agent, "would you like", "instead", "right now", "today"):
+        return BotDecision("No thank you. I only want to cancel it today, not reschedule.", False, "decline reschedule")
+    if contains_any(agent, "no appointment", "no appointments", "don't have", "do not have", "not scheduled"):
+        return BotDecision("Okay, thank you for checking. I will follow up with the office if needed. Goodbye.", True, "no appointment")
+    if contains_any(agent, "cancelled", "canceled", "cancel it", "cancel that", "all set"):
+        return BotDecision("Thank you for confirming. Goodbye.", True, "cancel confirmed")
     if asks_how_help(agent) or contains_any(agent, "what would you like"):
         return BotDecision("I need to cancel my dermatology appointment for next Thursday at 9 AM, and I do not want to reschedule today.", False, "cancel request")
-    if contains_any(agent, "confirm", "cancelled", "canceled"):
-        return BotDecision("Thank you for confirming. Goodbye.", True, "cancel confirmed")
     return close_or_repeat("Please cancel my dermatology appointment for next Thursday at 9 AM. I do not want to reschedule today.", turn_index)
 
 
 def handle_refill_normal(agent: str, patient: str, turn_index: int) -> BotDecision:
-    if contains_any(agent, "refill", "prescription") and contains_any(agent, "dosage", "dose", "question about"):
-        return BotDecision("I am asking for a refill of lisinopril 10 milligrams, once daily.", False, "refill not dosage advice")
-    if contains_any(agent, "dosage", "dose", "what medication", "which medication", "medication"):
-        return BotDecision("It is lisinopril 10 milligrams, once daily.", False, "medication details")
+    if contains_any(agent, "how many days", "days of", "are you out", "already out", "left"):
+        return BotDecision("I have two pills left.", False, "days remaining")
+    if contains_any(agent, "would you like to continue", "continue with your", "process your request"):
+        return BotDecision("Yes, please continue with the refill request.", False, "continue refill")
     if contains_any(agent, "pharmacy"):
         return BotDecision("Please send it to CVS on Main Street.", False, "pharmacy")
+    if contains_any(agent, "dosage", "dose", "what medication", "which medication", "medication"):
+        return BotDecision("It is lisinopril 10 milligrams, once daily.", False, "medication details")
     if contains_any(agent, "symptom", "urgent", "side effect", "emergency"):
-        return BotDecision("No symptoms. This is just a routine refill, and I have two pills left.", False, "no symptoms")
+        return BotDecision("No symptoms. This is just a routine refill.", False, "no symptoms")
+    if contains_any(agent, "1 to 2 business days", "one to two business days", "24", "48", "processed within"):
+        return BotDecision("Great. Please submit the refill request. Thank you, goodbye.", True, "timing answered")
+    if contains_any(agent, "sent", "submitted", "requested", "provider", "all set"):
+        return BotDecision("Thank you, goodbye.", True, "refill complete")
     if asks_how_help(agent) or contains_any(agent, "refill", "prescription"):
-        if "how long" not in patient:
-            return BotDecision("I need a refill for lisinopril 10 milligrams. I have two pills left, and I use CVS on Main Street. How long does it usually take?", False, "refill request")
-        return BotDecision("I just want to know how long the refill usually takes.", False, "timing question")
-    if contains_any(agent, "sent", "requested", "submitted", "provider", "24", "48"):
-        return BotDecision("Thank you, that answers my question. Goodbye.", True, "refill complete")
-    return close_or_repeat("I need a refill for lisinopril 10 milligrams and want to know how long it usually takes.", turn_index)
+        if "lisinopril" not in patient:
+            return BotDecision("I need a refill for lisinopril 10 milligrams. I have two pills left, and I use CVS on Main Street.", False, "refill request")
+        return BotDecision("I also wanted to ask how long refills usually take.", False, "timing question")
+    return close_or_repeat("I need a refill for lisinopril 10 milligrams, once daily, sent to CVS on Main Street.", turn_index)
 
 
 def handle_refill_urgent(agent: str, patient: str, turn_index: int) -> BotDecision:
-    if contains_any(agent, "chest pain", "severe", "911", "emergency", "urgent care"):
-        return BotDecision("I do not have chest pain and I am not in severe distress, but I want to know what to do if the shortness of breath gets worse.", False, "triage answer")
-    if contains_any(agent, "appointment", "provider", "discuss", "schedule"):
+    if contains_any(agent, "how many days", "days of", "are you out", "already out", "left"):
+        return BotDecision("I have about one or two doses left.", False, "inhaler remaining")
+    if contains_any(agent, "chest pain", "severe", "911", "emergency", "urgent care", "worse"):
+        return BotDecision("Understood. If it gets severe or I have chest pain, I will seek urgent care or call 911. Please also send the refill request.", True, "safe escalation acknowledged")
+    if contains_any(agent, "appointment", "provider", "discuss", "schedule", "speak with"):
         return BotDecision("Yes, I can speak with a provider. Should I seek urgent care if the breathing gets worse before then?", False, "asks escalation guidance")
     if asks_how_help(agent) or contains_any(agent, "refill", "medication", "inhaler"):
         return BotDecision("I need a refill for my albuterol inhaler. I also felt mildly short of breath after walking upstairs today.", False, "refill with symptom")
@@ -172,42 +196,55 @@ def handle_refill_urgent(agent: str, patient: str, turn_index: int) -> BotDecisi
 
 
 def handle_weekend_hours(agent: str, patient: str, turn_index: int) -> BotDecision:
-    if contains_any(agent, "closed", "not open", "weekday", "monday", "tuesday"):
+    if contains_any(agent, "is that correct", "is that right", "just to confirm", "general checkup", "routine office"):
+        return BotDecision("Yes, that is correct.", False, "confirm checkup")
+    if contains_any(agent, "closed", "not open", "sunday"):
         return BotDecision("Okay, if Sunday is not available, Monday or Tuesday morning works for me.", False, "accept weekday")
+    if contains_any(agent, "preferred day", "preferred time", "what day", "what time"):
+        return BotDecision("Monday or Tuesday morning would work.", False, "weekday preference")
+    if contains_any(agent, "scheduled", "booked", "confirmed", "all set"):
+        return BotDecision("Thank you. Goodbye.", True, "confirmed")
     if contains_any(agent, "when", "date", "time", "availability"):
         return BotDecision("I was hoping for Sunday at 10 AM. If the office is closed then, I can do Monday or Tuesday morning.", False, "weekend request")
     if asks_how_help(agent) or contains_any(agent, "what would you like"):
         return BotDecision("Can I come in Sunday at 10 AM for a checkup?", False, "sunday request")
-    if contains_any(agent, "confirm", "scheduled", "booked"):
-        return BotDecision("Thank you. Goodbye.", True, "confirmed")
     return close_or_repeat("I wanted to check if Sunday at 10 AM is available for a checkup.", turn_index)
 
 
 def handle_insurance(agent: str, patient: str, turn_index: int) -> BotDecision:
+    if ("confirm with your insurance" in agent or "check with your insurance" in agent or "check with your insurance plan" in agent or "good idea" in agent) and "aetna" in patient:
+        return BotDecision("That answers my question. Thank you, goodbye.", True, "insurance answered")
     if contains_any(agent, "which type", "what type", "reason for the referral", "specialist"):
         return BotDecision("It would be for an orthopedic visit for knee pain. I mainly want to know if Aetna is accepted and if a referral is required.", False, "specialist type")
-    if contains_any(agent, "insurance", "aetna", "referral") or asks_how_help(agent):
+    if contains_any(agent, "anything else"):
+        return BotDecision("No, that answers my question. Thank you, goodbye.", True, "complete")
+    if asks_how_help(agent) or contains_any(agent, "insurance", "aetna", "referral"):
         if "aetna" not in patient:
             return BotDecision("Do you accept Aetna, and would I need a referral for an orthopedic specialist visit?", False, "insurance question")
         return BotDecision("Thanks. To be safe, should I also confirm the referral requirement with my insurance plan?", False, "verification question")
-    if contains_any(agent, "anything else"):
-        return BotDecision("No, that answers my question. Thank you, goodbye.", True, "complete")
     return close_or_repeat("I am calling to ask if you accept Aetna and whether I need a referral for an orthopedic specialist visit.", turn_index)
 
 
 def handle_location(agent: str, patient: str, turn_index: int) -> BotDecision:
-    if contains_any(agent, "address", "parking", "wheelchair", "accessible", "location") and contains_any(agent, "1234", "suite", "austin", "recovery"):
-        if "repeat the address" not in patient:
-            return BotDecision("Thank you. Could you repeat the address once slowly so I can write it down?", False, "ask repeat")
-        return BotDecision("Got it. Thank you, that helps. Goodbye.", True, "location complete")
+    agent_has_location_answer = contains_any(agent, "address", "parking", "wheelchair", "accessible", "location", "athens", "nashville", "suite")
+    if agent_has_location_answer and contains_any(agent, "would you like to schedule", "would you like to book"):
+        return BotDecision("Not yet. I just needed the parking and wheelchair access information. Thank you, goodbye.", True, "decline scheduling")
+    if agent_has_location_answer and ("repeat the address" not in patient and "write it down" not in patient):
+        return BotDecision("Thank you. Could you repeat the address once slowly so I can write it down?", False, "ask repeat")
+    if agent_has_location_answer:
+        return BotDecision("Got it. Thank you, goodbye.", True, "location complete")
     if asks_how_help(agent) or contains_any(agent, "appointment", "something else", "what would you like"):
         return BotDecision("Before I schedule, I want to know which location has parking and wheelchair access.", False, "location question")
     return close_or_repeat("I am trying to find the office location with parking and wheelchair access before scheduling.", turn_index)
 
 
 def handle_unclear(agent: str, patient: str, turn_index: int) -> BotDecision:
-    if contains_any(agent, "appointment", "medication", "insurance", "something else", "what do you mean", "tell me more"):
-        if "rescheduling my follow-up" not in patient:
+    if contains_any(agent, "no upcoming", "don't have", "do not have", "not on file", "there isn't"):
+        return BotDecision("Okay, I understand. I was trying to move a follow-up, but if there is nothing on file I will call back later. Thank you.", True, "no follow-up found")
+    if contains_any(agent, "book a new", "schedule a new", "new weekday"):
+        return BotDecision("No, I was trying to move an existing follow-up, not book a new one. Thank you for checking.", True, "decline new follow-up")
+    if contains_any(agent, "appointment", "medication", "insurance", "something else", "what do you mean", "tell me more", "past appointment"):
+        if "follow-up appointment" not in patient:
             return BotDecision("I think it was about rescheduling my follow-up appointment from last time.", False, "clarified vague request")
         return BotDecision("I need to move that follow-up to another weekday afternoon.", False, "follow-up details")
     if asks_how_help(agent):
@@ -216,16 +253,24 @@ def handle_unclear(agent: str, patient: str, turn_index: int) -> BotDecision:
 
 
 def handle_interruption(agent: str, patient: str, turn_index: int) -> BotDecision:
+    if contains_any(agent, "no routine", "no openings", "no appointments", "none available"):
+        return BotDecision("Okay. What is the latest routine appointment available next week?", False, "asks next week alternative")
+    if offers_specific_slot(agent):
+        if contains_any(agent, "4:", "after 4", "4 pm", "4:00", "5:", "evening"):
+            return BotDecision("Yes, that works. Please book it.", False, "accept after four slot")
+        return BotDecision("That is a little too early for me. I need after 4 PM, but thank you for checking. Goodbye.", True, "decline early slot")
+    if contains_any(agent, "open to anyone", "anyone available", "any provider", "first available"):
+        return BotDecision("Yes, I am open to any available provider.", False, "provider flexible")
     if contains_any(agent, "urgent", "pain", "injury", "routine"):
-        return BotDecision("It is routine, not urgent. Sorry to interrupt, I only have a minute, and I need any weekday after 4 PM this week.", False, "routine with interruption")
+        return BotDecision("It is routine, not urgent. I only have a minute, and I need any weekday after 4 PM this week.", False, "routine with time constraint")
     if contains_any(agent, "when", "date", "time", "availability"):
         return BotDecision("Any weekday after 4 PM this week works for me.", False, "availability")
+    if contains_any(agent, "scheduled", "booked", "confirmed", "all set"):
+        return BotDecision("That works. Thank you, goodbye.", True, "confirmed")
     if asks_how_help(agent) or contains_any(agent, "appointment"):
         if "only have a minute" not in patient:
             return BotDecision("I need a same-week appointment. Sorry to interrupt, but I only have a minute.", False, "same week request")
         return BotDecision("I need a same-week routine appointment, any weekday after 4 PM.", False, "repeat request")
-    if contains_any(agent, "confirm", "scheduled", "booked"):
-        return BotDecision("That works. Thank you, goodbye.", True, "confirmed")
     return close_or_repeat("I need a same-week routine appointment, any weekday after 4 PM.", turn_index)
 
 
@@ -265,9 +310,9 @@ def scenario_request(scenario_id: str) -> str:
 
 
 def close_or_repeat(reply: str, turn_index: int) -> BotDecision:
-    if turn_index >= 6:
-        return BotDecision("Thank you, that helps. Goodbye.", True, "closing after enough turns")
-    return BotDecision(reply, False, "repeat scenario request")
+    if turn_index >= 7:
+        return BotDecision("Thank you for checking. Goodbye.", True, "closing after enough turns")
+    return BotDecision(reply, False, "scenario request")
 
 
 def last_text(transcript: list[dict[str, Any]], speaker: str) -> str:
@@ -286,7 +331,7 @@ def contains_any(text: str, *needles: str) -> bool:
 
 
 def asks_if_speaking_to_jamie(text: str) -> bool:
-    return contains_any(text, "speaking with jamie", "am i speaking with jamie", "is this jamie", "with jamie", "janie")
+    return contains_any(text, "speaking with jamie", "am i speaking with jamie", "is this jamie", "with jamie", "janie", "jamie?")
 
 
 def asks_name(text: str) -> bool:
@@ -306,15 +351,28 @@ def asks_how_help(text: str) -> bool:
 
 
 def asks_appointment_type(text: str) -> bool:
-    return contains_any(text, "type of appointment", "what type of appointment", "new patient", "follow-up", "routine")
+    return contains_any(text, "type of appointment", "what type of appointment", "new patient", "follow-up", "routine office", "routine visit")
 
 
 def no_clear_speech(text: str) -> bool:
     return "no clear speech" in text or "no speech" in text
 
 
+def offers_specific_slot(text: str) -> bool:
+    return (
+        contains_any(text, "opening", "available", "slot", "appointment")
+        and contains_any(text, "would you like", "does that work", "can book", "book that", "schedule that", "latest slot", "at ")
+    )
+
+
 def count_mentions(text: str, needle: str) -> int:
     return text.count(needle)
+
+
+def count_exact_patient_reply(patient_history_norm: str, reply_norm: str) -> int:
+    # Patient turns are joined with newlines before normalization. This check is
+    # intentionally simple and conservative.
+    return patient_history_norm.count(reply_norm)
 
 
 # The functions below are still used by analyze/debug utilities and tests from the
