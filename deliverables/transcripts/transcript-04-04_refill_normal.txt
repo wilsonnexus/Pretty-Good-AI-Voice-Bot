@@ -1,16 +1,20 @@
-[2026-06-28T02:07:54.437612+00:00] PGAI AGENT: This call may be recorded for quality and training purposes.
-[2026-06-28T02:07:54.461262+00:00] PATIENT BOT: Hi, I am calling for a refill of my lisinopril 10 milligram prescription.
-[2026-06-28T02:08:08.776947+00:00] PGAI AGENT: Are you looking to refill a prescription for your medication?
-[2026-06-28T02:08:08.791048+00:00] PATIENT BOT: It is lisinopril 10 milligrams, once daily.
-[2026-06-28T02:08:20.677620+00:00] PGAI AGENT: Please provide your date of birth.
-[2026-06-28T02:08:20.693632+00:00] PATIENT BOT: Sure, my date of birth is July 4, 2000.
-[2026-06-28T02:08:38.778908+00:00] PGAI AGENT: Thank you to confirm. You need a refill for lucida Pearl. 10 milligrams taken once daily. Is that correct?
-[2026-06-28T02:08:38.802959+00:00] PATIENT BOT: Yes, that is the correct callback number.
-[2026-06-28T02:08:50.926663+00:00] PGAI AGENT: How many days of Luna Pearl? Do you have left? If you are already out, just let me know.
-[2026-06-28T02:08:50.940711+00:00] PATIENT BOT: I have two pills left.
-[2026-06-28T02:09:06.227882+00:00] PGAI AGENT: I have your call back number of 716419. 3635, is that correct?
-[2026-06-28T02:09:06.241927+00:00] PATIENT BOT: Yes, that is correct.
-[2026-06-28T02:09:21.425888+00:00] PGAI AGENT: Is there anything else you'd like the clinic to know about your refill request, for example, any symptoms or urgency?
-[2026-06-28T02:09:21.457377+00:00] PATIENT BOT: No symptoms. This is just a routine refill.
-[2026-06-28T02:09:42.926823+00:00] PGAI AGENT: Could you please tell me the name of the pharmacy you want to use for your medication if you owe the address say or any details like cross streets or nearby stores that would help too. If you have their phone or fax number, please share that as well.
-[2026-06-28T02:09:42.941867+00:00] PATIENT BOT: The best callback number is 555-0142.
+[2026-06-28T04:03:10.340328+00:00] PGAI AGENT: This call may be recorded for quality and training purposes.
+[2026-06-28T04:03:10.372455+00:00] PATIENT BOT: Hi, I am calling for a refill of my lisinopril 10 milligram prescription.
+[2026-06-28T04:03:27.748122+00:00] PGAI AGENT: Okay, I hope you today. Are you looking for information about appointments medications insurance, or something else?
+[2026-06-28T04:03:29.148621+00:00] PATIENT BOT: I'm just looking for a refill on my medication. I have two pills left.
+[2026-06-28T04:03:40.327692+00:00] PGAI AGENT: Please provide your date of birth.
+[2026-06-28T04:03:40.340786+00:00] PATIENT BOT: Sure, my date of birth is July 4, 2000.
+[2026-06-28T04:03:55.175714+00:00] PGAI AGENT: I'll need your full name along with your date of birth. To look up your chart. Could you please tell me your first and last name?
+[2026-06-28T04:03:55.192252+00:00] PATIENT BOT: My name is Jamie Lee.
+[2026-06-28T04:04:07.055923+00:00] PGAI AGENT: (No clear speech detected.)
+[2026-06-28T04:04:08.430752+00:00] PATIENT BOT: Is there anything else you need from me to process the refill?
+[2026-06-28T04:04:17.546811+00:00] PGAI AGENT: Which medication do you need refilled today?
+[2026-06-28T04:04:17.564829+00:00] PATIENT BOT: I need a refill for lisinopril 10 milligrams, once daily, sent to CVS on Main Street.
+[2026-06-28T04:04:34.537361+00:00] PGAI AGENT: How many days of lisinopril do you have left? If you are already out, just let me know.
+[2026-06-28T04:04:34.557030+00:00] PATIENT BOT: Okay, what would be the next best option?
+[2026-06-28T04:04:48.067188+00:00] PGAI AGENT: If you are out of lisinopril, I can mark that you have 0 days left. If you have a few days remaining, just let me know how many
+[2026-06-28T04:04:49.329856+00:00] PATIENT BOT: I have two pills left, so I still have two days. Can you mark that for the refill?
+[2026-06-28T04:05:06.778095+00:00] PGAI AGENT: I have noted that you have 2 days of lisinopril left, can I confirm your call back number as 716-419-3635 for follow-up?
+[2026-06-28T04:05:06.792181+00:00] PATIENT BOT: The best callback number is 555-0142.
+[2026-06-28T04:05:23.782006+00:00] PGAI AGENT: I have to call back number as 555-0142. Is there anything else you'd like the clinic to know about your refill request such as symptoms or urgency?
+[2026-06-28T04:05:23.809028+00:00] PATIENT BOT: Thank you for checking. I will follow up with the office if needed. Goodbye.
