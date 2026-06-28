@@ -24,9 +24,27 @@ class Settings:
     assessment_number: str = DEFAULT_ASSESSMENT_NUMBER
     openai_api_key: str | None = None
     openai_model: str = "gpt-4o-mini"
-    max_turns_per_call: int = 10
+    max_turns_per_call: int = 12
     twilio_voice: str = "Polly.Joanna-Neural"
-    speech_gather_timeout_seconds: int = 10
+    speech_gather_timeout_seconds: int = 12
+    twilio_speech_timeout: str = "2"
+    pre_reply_pause_seconds: int = 0
+    post_goodbye_pause_seconds: int = 3
+    live_llm_responder: bool = True
+
+
+def _env_bool(name: str, default: bool = True) -> bool:
+    raw = os.getenv(name)
+    if raw is None:
+        return default
+    return raw.strip().lower() not in {"0", "false", "no", "off"}
+
+
+def _env_int(name: str, default: int) -> int:
+    try:
+        return int(os.getenv(name, str(default)))
+    except ValueError:
+        return default
 
 
 def get_settings(require_twilio: bool = False) -> Settings:
@@ -38,9 +56,13 @@ def get_settings(require_twilio: bool = False) -> Settings:
         assessment_number=os.getenv("ASSESSMENT_NUMBER", DEFAULT_ASSESSMENT_NUMBER),
         openai_api_key=os.getenv("OPENAI_API_KEY") or None,
         openai_model=os.getenv("OPENAI_MODEL", "gpt-4o-mini"),
-        max_turns_per_call=int(os.getenv("MAX_TURNS_PER_CALL", "10")),
+        max_turns_per_call=_env_int("MAX_TURNS_PER_CALL", 12),
         twilio_voice=os.getenv("TWILIO_VOICE", "Polly.Joanna-Neural"),
-        speech_gather_timeout_seconds=int(os.getenv("SPEECH_GATHER_TIMEOUT_SECONDS", "10")),
+        speech_gather_timeout_seconds=_env_int("SPEECH_GATHER_TIMEOUT_SECONDS", 12),
+        twilio_speech_timeout=os.getenv("TWILIO_SPEECH_TIMEOUT", "2"),
+        pre_reply_pause_seconds=_env_int("PRE_REPLY_PAUSE_SECONDS", 0),
+        post_goodbye_pause_seconds=_env_int("POST_GOODBYE_PAUSE_SECONDS", 3),
+        live_llm_responder=_env_bool("LIVE_LLM_RESPONDER", True),
     )
 
     if settings.assessment_number != DEFAULT_ASSESSMENT_NUMBER:
