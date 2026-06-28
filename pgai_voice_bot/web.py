@@ -4,7 +4,7 @@ import os
 from typing import Any
 
 import requests
-from flask import Flask, Response, jsonify, request
+from flask import Flask, Response, request
 from twilio.twiml.voice_response import Gather, Pause, VoiceResponse
 
 from .config import DEFAULT_ASSESSMENT_NUMBER, get_settings
@@ -25,8 +25,9 @@ def health() -> tuple[dict[str, str], int]:
 def voice_start() -> Response:
     """First TwiML after the outbound call connects.
 
-    We listen before speaking so the PG AI agent can say its greeting first. That
-    avoids overlapping the agent's introduction.
+    We listen first so the Pretty Good AI agent can greet and ask its opening
+    question. Using speech_timeout=auto helps avoid cutting the agent off during
+    short pauses in its streamed speech.
     """
     settings = get_settings(require_twilio=False)
     scenario_id = request.args.get("scenario_id", "01_simple_schedule")
@@ -48,18 +49,9 @@ def voice_start() -> Response:
         update_metadata(call_sid, scenario_id=scenario_id, scenario_title=scenario.title)
 
     response = VoiceResponse()
-    gather = Gather(
-        input="speech",
-        action=f"/voice/reply?scenario_id={scenario_id}&turn=0",
-        method="POST",
-        timeout=settings.speech_gather_timeout_seconds,
-        speech_timeout="2",
-        action_on_empty_result=True,
-        profanity_filter=False,
-    )
+    gather = make_gather(settings, scenario_id, 0)
     gather.append(Pause(length=1))
     response.append(gather)
-    # If Twilio falls through, force the first reply.
     response.redirect(f"/voice/reply?scenario_id={scenario_id}&turn=0", method="POST")
     return twiml(response)
 
@@ -99,32 +91,24 @@ def voice_reply() -> Response:
     save_state(call_sid, state)
 
     response = VoiceResponse()
-    # Give the callee a small buffer after Twilio decides their turn ended.
-    # This makes the caller sound less interruptive with voice agents that pause
-    # briefly while thinking or streaming speech.
-    response.pause(length=2)
+
+    # A one-second pause is a compromise: it prevents immediate overlap, but it
+    # does not make the patient sound like it is waiting forever after each turn.
+    pre_reply_pause = int(os.getenv("PRE_REPLY_PAUSE_SECONDS", "1"))
+    if pre_reply_pause > 0:
+        response.pause(length=pre_reply_pause)
     response.say(decision.reply, voice=settings.twilio_voice)
 
-    should_end = decision.done or (turn_index + 1) >= settings.max_turns_per_call
+    max_turns = int(os.getenv("MAX_TURNS_PER_CALL", str(settings.max_turns_per_call)))
+    should_end = decision.done or (turn_index + 1) >= max_turns
     if should_end:
-        # Leave a short pause after the final goodbye so the call does not feel
-        # like an abrupt hangup.
-        response.pause(length=3)
+        final_pause = int(os.getenv("POST_GOODBYE_PAUSE_SECONDS", "2"))
+        if final_pause > 0:
+            response.pause(length=final_pause)
         response.hangup()
         return twiml(response)
 
-    gather = Gather(
-        input="speech",
-        action=f"/voice/reply?scenario_id={scenario_id}&turn={turn_index + 1}",
-        method="POST",
-        timeout=settings.speech_gather_timeout_seconds,
-        speech_timeout="2",
-        action_on_empty_result=True,
-        profanity_filter=False,
-    )
-    gather.append(Pause(length=1))
-    response.append(gather)
-    # Keep progressing even if speech recognition does not fire.
+    response.append(make_gather(settings, scenario_id, turn_index + 1))
     response.redirect(f"/voice/reply?scenario_id={scenario_id}&turn={turn_index + 1}", method="POST")
     return twiml(response)
 
@@ -156,7 +140,6 @@ def recording_callback() -> tuple[dict[str, str], int]:
 
     if recording_url and recording_status == "completed":
         try:
-            # Twilio recording media can be fetched by adding an extension.
             mp3_url = recording_url + ".mp3"
             target_dir = os.path.join("data", "calls", call_sid)
             os.makedirs(target_dir, exist_ok=True)
@@ -173,6 +156,19 @@ def recording_callback() -> tuple[dict[str, str], int]:
         except Exception as exc:
             update_metadata(call_sid, recording_download_error=str(exc))
     return {"ok": "true"}, 200
+
+
+def make_gather(settings: Any, scenario_id: str, turn: int) -> Gather:
+    speech_timeout = os.getenv("TWILIO_SPEECH_TIMEOUT", "auto")
+    return Gather(
+        input="speech",
+        action=f"/voice/reply?scenario_id={scenario_id}&turn={turn}",
+        method="POST",
+        timeout=settings.speech_gather_timeout_seconds,
+        speech_timeout=speech_timeout,
+        action_on_empty_result=True,
+        profanity_filter=False,
+    )
 
 
 def twiml(response: VoiceResponse) -> Response:

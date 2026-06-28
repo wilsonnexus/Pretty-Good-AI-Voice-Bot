@@ -24,9 +24,9 @@ class Settings:
     assessment_number: str = DEFAULT_ASSESSMENT_NUMBER
     openai_api_key: str | None = None
     openai_model: str = "gpt-4o-mini"
-    max_turns_per_call: int = 8
+    max_turns_per_call: int = 10
     twilio_voice: str = "Polly.Joanna-Neural"
-    speech_gather_timeout_seconds: int = 8
+    speech_gather_timeout_seconds: int = 10
 
 
 def get_settings(require_twilio: bool = False) -> Settings:
@@ -38,9 +38,9 @@ def get_settings(require_twilio: bool = False) -> Settings:
         assessment_number=os.getenv("ASSESSMENT_NUMBER", DEFAULT_ASSESSMENT_NUMBER),
         openai_api_key=os.getenv("OPENAI_API_KEY") or None,
         openai_model=os.getenv("OPENAI_MODEL", "gpt-4o-mini"),
-        max_turns_per_call=int(os.getenv("MAX_TURNS_PER_CALL", "8")),
+        max_turns_per_call=int(os.getenv("MAX_TURNS_PER_CALL", "10")),
         twilio_voice=os.getenv("TWILIO_VOICE", "Polly.Joanna-Neural"),
-        speech_gather_timeout_seconds=int(os.getenv("SPEECH_GATHER_TIMEOUT_SECONDS", "8")),
+        speech_gather_timeout_seconds=int(os.getenv("SPEECH_GATHER_TIMEOUT_SECONDS", "10")),
     )
 
     if settings.assessment_number != DEFAULT_ASSESSMENT_NUMBER:
