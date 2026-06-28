@@ -53,7 +53,7 @@ def voice_start() -> Response:
         action=f"/voice/reply?scenario_id={scenario_id}&turn=0",
         method="POST",
         timeout=settings.speech_gather_timeout_seconds,
-        speech_timeout="auto",
+        speech_timeout="2",
         action_on_empty_result=True,
         profanity_filter=False,
     )
@@ -99,11 +99,17 @@ def voice_reply() -> Response:
     save_state(call_sid, state)
 
     response = VoiceResponse()
+    # Give the callee a small buffer after Twilio decides their turn ended.
+    # This makes the caller sound less interruptive with voice agents that pause
+    # briefly while thinking or streaming speech.
+    response.pause(length=2)
     response.say(decision.reply, voice=settings.twilio_voice)
 
     should_end = decision.done or (turn_index + 1) >= settings.max_turns_per_call
     if should_end:
-        response.pause(length=1)
+        # Leave a short pause after the final goodbye so the call does not feel
+        # like an abrupt hangup.
+        response.pause(length=3)
         response.hangup()
         return twiml(response)
 
@@ -112,7 +118,7 @@ def voice_reply() -> Response:
         action=f"/voice/reply?scenario_id={scenario_id}&turn={turn_index + 1}",
         method="POST",
         timeout=settings.speech_gather_timeout_seconds,
-        speech_timeout="auto",
+        speech_timeout="2",
         action_on_empty_result=True,
         profanity_filter=False,
     )

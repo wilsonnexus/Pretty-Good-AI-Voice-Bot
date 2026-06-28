@@ -63,6 +63,8 @@ class PatientResponder:
             return BotDecision(f"Sure, my date of birth is {DEMO_DOB}.", False, "dob provided")
 
         if asks_phone(agent):
+            if contains_any(agent, "correct", "is that right", "is this right"):
+                return BotDecision("Yes, that is correct.", False, "phone confirmed")
             return self._dedupe(f"The best callback number is {DEMO_PHONE}.", False, "phone provided", patient, turn_index)
 
         if no_clear_speech(agent):
@@ -99,11 +101,11 @@ class PatientResponder:
         """
         reply_norm = normalize(reply)
         repeats = count_exact_patient_reply(patient, reply_norm)
-        if not done and repeats >= 1 and turn_index >= 4:
+        if not done and repeats >= 2 and turn_index >= 6:
             return BotDecision(
-                "I think I already gave the details. Thank you for checking; I will follow up with the office. Goodbye.",
+                "Thanks for your help. I do not want to take more of your time, so I will follow up with the office if needed. Goodbye.",
                 True,
-                f"stopped repeated reply: {notes}",
+                f"polite stop after repeated reply: {notes}",
             )
         return BotDecision(reply, done, notes)
 
@@ -112,6 +114,8 @@ class PatientResponder:
 
 
 def handle_simple_schedule(agent: str, patient: str, turn_index: int) -> BotDecision:
+    if contains_any(agent, "is set", "is scheduled", "you are scheduled", "your annual checkup is set", "please bring", "all set", "confirmed"):
+        return BotDecision("Great, thank you for confirming. I appreciate your help. Goodbye.", True, "appointment confirmed")
     if offers_specific_slot(agent):
         return BotDecision("Yes, please book that slot.", False, "accept offered appointment")
     if contains_any(agent, "is that right", "is that correct", "just to confirm"):
@@ -122,22 +126,24 @@ def handle_simple_schedule(agent: str, patient: str, turn_index: int) -> BotDeci
         return BotDecision("It is not urgent. It is just a routine annual checkup.", False, "non urgent")
     if contains_any(agent, "when", "date", "time", "availability", "prefer"):
         return BotDecision("Next Tuesday or Wednesday morning would be best if either is available.", False, "availability")
-    if contains_any(agent, "scheduled", "booked", "confirmed", "you are all set"):
-        return BotDecision("Great, thank you. Goodbye.", True, "appointment confirmed")
+    if contains_any(agent, "scheduled", "booked", "confirmed", "you are all set", "is set"):
+        return BotDecision("Great, thank you for confirming. I appreciate your help. Goodbye.", True, "appointment confirmed")
     if asks_how_help(agent) or asks_appointment_type(agent) or contains_any(agent, "what type", "what brings you"):
         return BotDecision("I would like to schedule a new patient annual checkup.", False, "appointment type")
     return close_or_repeat("I would like to schedule a new patient annual checkup, preferably next Tuesday or Wednesday morning.", turn_index)
 
 
 def handle_reschedule(agent: str, patient: str, turn_index: int) -> BotDecision:
-    if contains_any(agent, "document your request", "follow up with you", "support team", "clinic support"):
-        return BotDecision("Yes, please document that I want to move the Friday 3 PM appointment to Monday after 2 PM. Thank you.", True, "accept support follow up")
+    if contains_any(agent, "i will document", "while i add a note", "add a note", "document your request"):
+        return BotDecision("Yes, please document that request. Thank you for helping with it.", False, "allow documentation")
+    if contains_any(agent, "documented", "added a note", "team will review", "follow up with you", "support team", "clinic support"):
+        return BotDecision("Thank you. I appreciate it. Goodbye.", True, "support follow up accepted")
     if contains_any(agent, "no appointment", "no appointments", "don't see", "do not see", "don't have", "do not have", "not on file", "unable to proceed"):
         return BotDecision("That's strange. I was told I had a Friday 3 PM appointment. Could you document a follow-up for the office to review it?", False, "appointment not found")
     if contains_any(agent, "book a new", "schedule a new", "new appointment instead"):
         return BotDecision("No thank you. I only want to reschedule the existing Friday 3 PM appointment.", False, "reject new appointment")
-    if contains_any(agent, "current", "existing", "which appointment", "what appointment", "what time"):
-        return BotDecision("It is my Friday 3 PM appointment with Dr. Patel.", False, "current appointment")
+    if contains_any(agent, "is this the appointment", "current", "existing", "which appointment", "what appointment", "what time"):
+        return BotDecision("No, I was trying to move a Friday 3 PM appointment. If that is not showing, please have the office review it.", False, "current appointment mismatch")
     if contains_any(agent, "when", "date", "time", "availability", "move"):
         return BotDecision("I need to move it to the following Monday after 2 PM.", False, "new time")
     if contains_any(agent, "rescheduled", "changed", "all set"):
@@ -152,8 +158,8 @@ def handle_cancel(agent: str, patient: str, turn_index: int) -> BotDecision:
         return BotDecision("Okay, please connect me with patient support. I still do not want to reschedule today. Thank you.", True, "support handoff accepted")
     if contains_any(agent, "new appointment", "book", "reschedule", "schedule") and contains_any(agent, "would you like", "instead", "right now", "today"):
         return BotDecision("No thank you. I only want to cancel it today, not reschedule.", False, "decline reschedule")
-    if contains_any(agent, "no appointment", "no appointments", "don't have", "do not have", "not scheduled"):
-        return BotDecision("Okay, thank you for checking. I will follow up with the office if needed. Goodbye.", True, "no appointment")
+    if contains_any(agent, "no appointment", "no appointments", "don't have", "do not have", "not scheduled", "not see"):
+        return BotDecision("Okay, thank you for checking. I will not make any changes today, and I will follow up with the office if needed. Goodbye.", True, "no appointment")
     if contains_any(agent, "cancelled", "canceled", "cancel it", "cancel that", "all set"):
         return BotDecision("Thank you for confirming. Goodbye.", True, "cancel confirmed")
     if asks_how_help(agent) or contains_any(agent, "what would you like"):
@@ -162,6 +168,8 @@ def handle_cancel(agent: str, patient: str, turn_index: int) -> BotDecision:
 
 
 def handle_refill_normal(agent: str, patient: str, turn_index: int) -> BotDecision:
+    if contains_any(agent, "correct for a call", "is that correct", "is that right", "callback", "call back"):
+        return BotDecision("Yes, that is the correct callback number.", False, "callback confirmed")
     if contains_any(agent, "how many days", "days of", "are you out", "already out", "left"):
         return BotDecision("I have two pills left.", False, "days remaining")
     if contains_any(agent, "would you like to continue", "continue with your", "process your request"):
@@ -174,8 +182,8 @@ def handle_refill_normal(agent: str, patient: str, turn_index: int) -> BotDecisi
         return BotDecision("No symptoms. This is just a routine refill.", False, "no symptoms")
     if contains_any(agent, "1 to 2 business days", "one to two business days", "24", "48", "processed within"):
         return BotDecision("Great. Please submit the refill request. Thank you, goodbye.", True, "timing answered")
-    if contains_any(agent, "sent", "submitted", "requested", "provider", "all set"):
-        return BotDecision("Thank you, goodbye.", True, "refill complete")
+    if contains_any(agent, "sent", "submitted", "requested", "provider", "all set", "we will process", "request is in"):
+        return BotDecision("Thank you. I appreciate the help. Goodbye.", True, "refill complete")
     if asks_how_help(agent) or contains_any(agent, "refill", "prescription"):
         if "lisinopril" not in patient:
             return BotDecision("I need a refill for lisinopril 10 milligrams. I have two pills left, and I use CVS on Main Street.", False, "refill request")
@@ -184,6 +192,8 @@ def handle_refill_normal(agent: str, patient: str, turn_index: int) -> BotDecisi
 
 
 def handle_refill_urgent(agent: str, patient: str, turn_index: int) -> BotDecision:
+    if contains_any(agent, "is that correct", "just to confirm", "confirm you need", "confirm that you need"):
+        return BotDecision("Yes, that is correct. I need the albuterol refill, and I also had mild shortness of breath after stairs today.", False, "confirm inhaler refill")
     if contains_any(agent, "how many days", "days of", "are you out", "already out", "left"):
         return BotDecision("I have about one or two doses left.", False, "inhaler remaining")
     if contains_any(agent, "chest pain", "severe", "911", "emergency", "urgent care", "worse"):
@@ -196,6 +206,8 @@ def handle_refill_urgent(agent: str, patient: str, turn_index: int) -> BotDecisi
 
 
 def handle_weekend_hours(agent: str, patient: str, turn_index: int) -> BotDecision:
+    if contains_any(agent, "would you like to schedule", "would you like to book", "can help you book"):
+        return BotDecision("Yes, please schedule a routine checkup for Monday or Tuesday morning.", False, "accept weekday booking")
     if contains_any(agent, "is that correct", "is that right", "just to confirm", "general checkup", "routine office"):
         return BotDecision("Yes, that is correct.", False, "confirm checkup")
     if contains_any(agent, "closed", "not open", "sunday"):
@@ -239,6 +251,10 @@ def handle_location(agent: str, patient: str, turn_index: int) -> BotDecision:
 
 
 def handle_unclear(agent: str, patient: str, turn_index: int) -> BotDecision:
+    if contains_any(agent, "5:15", "5 15", "five fifteen"):
+        return BotDecision("The 5:15 PM appointment works for me. Please book that one.", False, "accept 5:15 slot")
+    if contains_any(agent, "scheduled", "booked", "confirmed", "all set"):
+        return BotDecision("Thank you for helping me fix that. Goodbye.", True, "follow-up rescheduled")
     if contains_any(agent, "no upcoming", "don't have", "do not have", "not on file", "there isn't"):
         return BotDecision("Okay, I understand. I was trying to move a follow-up, but if there is nothing on file I will call back later. Thank you.", True, "no follow-up found")
     if contains_any(agent, "book a new", "schedule a new", "new weekday"):
@@ -253,6 +269,8 @@ def handle_unclear(agent: str, patient: str, turn_index: int) -> BotDecision:
 
 
 def handle_interruption(agent: str, patient: str, turn_index: int) -> BotDecision:
+    if contains_any(agent, "is that correct", "is that right", "routine care"):
+        return BotDecision("Yes, routine care is correct. I am open to any provider after 4 PM if available.", False, "confirm routine care")
     if contains_any(agent, "no routine", "no openings", "no appointments", "none available"):
         return BotDecision("Okay. What is the latest routine appointment available next week?", False, "asks next week alternative")
     if offers_specific_slot(agent):
@@ -310,8 +328,8 @@ def scenario_request(scenario_id: str) -> str:
 
 
 def close_or_repeat(reply: str, turn_index: int) -> BotDecision:
-    if turn_index >= 7:
-        return BotDecision("Thank you for checking. Goodbye.", True, "closing after enough turns")
+    if turn_index >= 8:
+        return BotDecision("Thank you for your help. I have what I need for now. Goodbye.", True, "polite closing after enough turns")
     return BotDecision(reply, False, "scenario request")
 
 
@@ -331,7 +349,20 @@ def contains_any(text: str, *needles: str) -> bool:
 
 
 def asks_if_speaking_to_jamie(text: str) -> bool:
-    return contains_any(text, "speaking with jamie", "am i speaking with jamie", "is this jamie", "with jamie", "janie", "jamie?")
+    # The assessment agent sometimes mis-transcribes Jamie as Amy, Janie, or Cheney.
+    # Any direct "am I speaking with ..." check should receive a simple identity confirmation.
+    return contains_any(
+        text,
+        "am i speaking",
+        "speaking with",
+        "is this",
+        "with jamie",
+        "with amy",
+        "with janie",
+        "with cheney",
+        "jamie?",
+        "janie?",
+    )
 
 
 def asks_name(text: str) -> bool:
@@ -343,7 +374,7 @@ def asks_dob(text: str) -> bool:
 
 
 def asks_phone(text: str) -> bool:
-    return contains_any(text, "phone", "callback", "call back number", "best number")
+    return contains_any(text, "phone", "callback", "call back", "best number", "number as", "number is", "correct for a call")
 
 
 def asks_how_help(text: str) -> bool:
